@@ -1,0 +1,31 @@
+stages:
+  - cleancode
+  - test
+  - deploy
+
+Cleancode:
+  stage: cleancode
+  image: node:latest
+  script:
+    - npm install
+    - npm run lint
+  allow_failure: true
+
+Unit Testing:
+  stage: test
+  image: node:latest
+  script:
+    - npm install
+    - npm run test
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+
+Deploy to Heroku:
+  stage: deploy
+  image: ruby:latest
+  before_script:
+    - gem install dpl
+  only:
+    - main
+    - master
+  script:
+    - dpl --provider=heroku --app=$HEROKU_APP --api-key=$HEROKU_API_KEY

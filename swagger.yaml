@@ -1,0 +1,519 @@
+openapi: 3.0.0
+info:
+  title: Final Project
+  version: 1.0.0
+tags:
+  - name: Users
+    description: Users
+  - name: Products
+    description: Products
+
+servers:
+  - url: http://localhost:8000
+
+paths:
+  /api/v1/register:
+    post:
+      tags:
+        - Users
+      summary: Regist
+      description: Regist User
+      requestBody:
+        $ref: '#/components/requestBodies/Regist'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                DefaultResponse:
+                  $ref: '#/components/examples/SuccessfullRegistResponse'
+  /api/v1/login:
+    post:
+      tags:
+        - Users
+      summary: Login
+      description: Login User
+      requestBody:
+        $ref: '#/components/requestBodies/Login'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+              examples:
+                DefaultResponse:
+                  $ref: '#/components/examples/SuccessfullLoginResponse'
+  /users/{id}:
+    get:
+      tags:
+        - Users
+      summary: Get the user profile
+      description: Return a profile user
+      parameters:
+        - name: id
+          in: path
+          description: Id of user
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_3'
+              examples:
+                LoginSuccess:
+                  $ref: '#/components/examples/SuccessfullTokenResponse'
+    put:
+      tags:
+        - Users
+      summary: Update the user profile
+      description: update
+      parameters:
+        - name: id
+          in: path
+          description: Id user
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        $ref: '#/components/requestBodies/Users'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_4'
+              examples:
+                DefaultResponse:
+                  $ref: '#/components/examples/SuccessfullSingleUsersResponse'
+  /products:
+    get:
+      tags:
+        - Products
+      summary: Get all products
+      description: Return all products from database
+      parameters:
+        - name: ownerId
+          in: query
+          required: false
+          style: form
+          explode: true
+          allowReserved: true
+          schema:
+            type: integer
+          example: 1
+        - name: sold
+          in: query
+          required: false
+          style: form
+          explode: true
+          allowReserved: true
+          schema:
+            type: boolean
+          example: true
+      responses:
+        '200':
+          description: succes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_2'
+              examples:
+                DefaultResponse:
+                  $ref: '#/components/examples/SuccessfullMultipleProductsResponse'
+    post:
+      tags:
+        - Products
+      summary: Add new product
+      description: return a new product
+      requestBody:
+        $ref: '#/components/requestBodies/Products'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_5'
+              examples:
+                DefaultResponse:
+                  $ref: '#/components/examples/AddNewProduct'
+components:
+  schemas:
+    Login:
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+          nullable: false
+        password:
+          type: string
+          nullable: false
+    Regist:
+      type: object
+      properties:
+        username:
+          type: string
+          nullable: false
+        email:
+          type: string
+          nullable: false
+        password:
+          type: string
+          nullable: false
+    RegistResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: false
+        email:
+          type: string
+          nullable: false
+        username:
+          type: string
+          nullable: false
+        password:
+          type: string
+          nullable: false
+    LoginResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          nullable: false
+        email:
+          type: string
+          nullable: false
+        username:
+          type: string
+          nullable: false
+        token:
+          type: string
+          nullable: false
+    TokenResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          nullable: false
+        img:
+          type: string
+          nullable: false
+        username:
+          type: string
+          nullable: false
+        city:
+          type: string
+          nullable: false
+        address:
+          type: string
+          nullable: false
+        phone:
+          type: string
+          nullable: false
+    Category:
+      type: object
+      properties:
+        category_name:
+          type: string
+          enum:
+            - aksesoris
+            - aksesoris
+            - aksesoris
+          nullable: false
+          example: null
+    ProductsResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        image:
+          type: array
+          items:
+            type: string
+        name:
+          type: string
+          nullable: false
+        category_code:
+          maxLength: 1
+          minLength: 1
+          type: integer
+          nullable: false
+          enum:
+            - 1
+            - 2
+            - 3
+        category:
+          $ref: '#/components/schemas/Category'
+        price:
+          type: string
+          nullable: false
+    UpdateUsers:
+      required:
+        - img
+        - username
+        - city
+        - address
+        - phone
+      type: object
+      properties:
+        img:
+          type: string
+          nullable: false
+        username:
+          type: string
+          nullable: false
+        city:
+          type: string
+          nullable: false
+        address:
+          type: string
+          nullable: false
+        phone:
+          type: string
+          nullable: false
+    UpdateUserResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        img:
+          type: string
+          nullable: false
+        username:
+          type: string
+          nullable: false
+        city:
+          type: string
+          nullable: false
+        address:
+          type: string
+          nullable: false
+        phone:
+          type: string
+          nullable: false
+        created_at:
+          type: string
+          format: date-time
+          nullable: false
+        updated_at:
+          type: string
+          format: date-time
+          nullable: false
+    Products:
+      required:
+        - name
+        - price
+        - category_code
+        - category
+        - description
+        - image
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: false
+        price:
+          type: string
+          nullable: false
+        category_code:
+          maxLength: 1
+          minLength: 1
+          type: integer
+          nullable: false
+          enum:
+            - 1
+            - 2
+            - 3
+        category:
+          $ref: '#/components/schemas/Category'
+        description:
+          type: string
+          nullable: false
+        image:
+          type: array
+          items:
+            type: string
+            nullable: false
+    inline_response_200:
+      type: object
+      properties:
+        success:
+          type: boolean
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/RegistResponse'
+    inline_response_200_1:
+      type: object
+      properties:
+        success:
+          type: boolean
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/LoginResponse'
+    inline_response_200_2:
+      type: object
+      properties:
+        success:
+          type: boolean
+        results:
+          $ref: '#/components/schemas/ProductsResponse'
+    inline_response_200_3:
+      type: object
+      properties:
+        success:
+          type: boolean
+        results:
+          $ref: '#/components/schemas/TokenResponse'
+    inline_response_200_4:
+      type: object
+      properties:
+        success:
+          type: boolean
+        results:
+          $ref: '#/components/schemas/UpdateUserResponse'
+    inline_response_200_5:
+      type: object
+      properties:
+        success:
+          type: boolean
+        results:
+          $ref: '#/components/schemas/Products'
+  examples:
+    RegistRequestBody:
+      value:
+        username: rizky
+        email: rizky@gmail.com
+        password: rizky
+    SuccessfullRegistResponse:
+      value:
+        id: 1
+        username: rizky
+        email: rizky@gmail.com
+        password: rizky
+    LoginRequestBody:
+      value:
+        email: rizky@gmail.com
+        password: rizky
+    UpdateRequestBody:
+      value:
+        img: ''
+        username: rizkys
+        city: sukabumi
+        address: sukabumi
+        phone: '6288012'
+    SuccessfullLoginResponse:
+      value:
+        success: true
+        results:
+          id: 1
+          username: rizky
+          email: rizky@gmail.com
+          token: '12345'
+    SuccessfullMultipleProductsResponse:
+      value:
+        success: true
+        results:
+          id: 1
+          image:
+            - http
+            - http
+            - http
+          name: Jam Tangan
+          category_code: 1
+          category: aksesoris
+          price: '25000'
+    SuccessfullTokenResponse:
+      value:
+        success: true
+        results:
+          id: 1
+          img: ..
+          username: rizky
+          city: sukabumi
+          address: sukabumi
+          phone: '628226213'
+    SuccessfullSingleUsersResponse:
+      value:
+        success: true
+        results:
+          id: 1
+          img: ''
+          username: rizkys
+          city: sukabumi
+          address: sukabumi
+          phone: '6288012'
+          created_at: 2022-04-30T09:19:52.527Z
+          updated_at: 2022-04-30T09:19:52.527Z
+    AddNewProduct:
+      value:
+        success: true
+        results:
+          name: Jam Tangan
+          price: '25000'
+          category_code: 1
+          category: aksesoris
+          description: Add Product
+          image:
+            - http
+            - http
+            - http
+  requestBodies:
+    Regist:
+      description: Regist User
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Regist'
+          examples:
+            DefaultResponse:
+              $ref: '#/components/examples/RegistRequestBody'
+    Users:
+      description: Update
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateUsers'
+          examples:
+            DefaultResponse:
+              $ref: '#/components/examples/UpdateRequestBody'
+    Products:
+      description: Add Product
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Products'
+          examples:
+            DefaulsResponse:
+              $ref: '#/components/examples/AddNewProduct'
+    Login:
+      description: User object need to be added the database
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Login'
+          examples:
+            DefaultResponse:
+              $ref: '#/components/examples/LoginRequestBody'
+      required: true

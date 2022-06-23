@@ -16,6 +16,9 @@
     "sequelize-cli": "^6.4.1",
     "swagger-ui-express": "^4.4.0"
   },
+  "engine": {
+    "node": "16.x"
+  },
   "scripts": {
     "start": "nodemon .",
     "migrate": "sequelize-cli db:migrate",
