@@ -23,12 +23,12 @@ async function productPut(req, res) {
       res.send("Data tidak ada");
     }
   } catch (err) {
-    res.send(err)
+    res.send(err);
 
   }
 }
 
-module.exports = productPut
+module.exports = productPut;
 
 
 

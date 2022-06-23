@@ -18,11 +18,11 @@ async function productGetByID(req, res) {
             //     description: product.description,
             //     img_url: product.img_url
             // });
-            res.send(product)
+            res.send(product);
             return;
         }
     } catch (err) {
-        res.send(err)
+        res.send(err);
     }
 }
 

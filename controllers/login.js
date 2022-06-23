@@ -34,7 +34,7 @@ async function login(req, res) {
       res.send("invalid");
     }
   } catch (err) {
-    res.send(err)
+    res.send(err);
   }
 
 }

@@ -1,15 +1,15 @@
 stages:
-  # - cleancode
+  - cleancode
   # - test
   - deploy
 
-# Cleancode:
-#   stage: cleancode
-#   image: node:latest
-#   script:
-#     - npm install
-#     - npm run lint
-#   allow_failure: true
+Cleancode:
+  stage: cleancode
+  image: node:latest
+  script:
+    - npm install
+    - npm run lint
+  allow_failure: true
 
 # Unit Testing:
 #   stage: test

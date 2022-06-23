@@ -1,16 +1,16 @@
-const { Products } = require("../models")
-const jwt = require("jsonwebtoken")
+const { Products } = require("../models");
+const jwt = require("jsonwebtoken");
 
 async function productPost(req, res) {
     try {
-        let header = req.headers.authorization.split("Bearer ")[1]
-        let user = jwt.verify(header, "s3cr3t")
-        let categoryInput = req.body.category_id
-        let nameInput = req.body.name
-        let priceInput = req.body.price
-        let descriptionInput = req.body.description
-        let img_urlInput = req.body.img_url
-        console.log(req.body)
+        let header = req.headers.authorization.split("Bearer ")[1];
+        let user = jwt.verify(header, "s3cr3t");
+        let categoryInput = req.body.category_id;
+        let nameInput = req.body.name;
+        let priceInput = req.body.price;
+        let descriptionInput = req.body.description;
+        let img_urlInput = req.body.img_url;
+        console.log(req.body);
         let product = await Products.create({
             category_id: categoryInput,
             name: nameInput,
@@ -22,9 +22,9 @@ async function productPost(req, res) {
         });
 
         if (product) {
-            res.status(201).json({ message: `Product ${nameInput} berhasil dipasang`})
+            res.status(201).json({ message: `Product ${nameInput} berhasil dipasang`});
         } else {
-            res.status(424).json({ message: `Product ${nameInput} sudah ada`})
+            res.status(424).json({ message: `Product ${nameInput} sudah ada`});
         }
 
         // if (product) {
@@ -34,8 +34,8 @@ async function productPost(req, res) {
         //     img_url: req.body.img_url,
         // })
     } catch (err) {
-        console.log(err)
-        res.send(err)
+        console.log(err);
+        res.send(err);
     }
 }
 

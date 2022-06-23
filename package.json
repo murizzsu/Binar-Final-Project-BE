@@ -2,6 +2,8 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
+  "repository": "https://gitlab.com/MardhaniDN9497/backend-2-final-project.git",
+  "author": "mardhaniDN <mardhani9497fmipa.2019@student.uny.ac.id>",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -22,6 +24,11 @@
   "scripts": {
     "start": "nodemon .",
     "migrate": "sequelize-cli db:migrate",
-    "sequelize-cli": "sequelize-cli"
+    "sequelize-cli": "sequelize-cli",
+    "eslint": "eslint",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "eslint": "^8.18.0"
   }
 }

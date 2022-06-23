@@ -1,10 +1,10 @@
 const { Users } = require("../models");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
 async function productDelete(req, res) {
     try {
-        let header = req.headers.authorization.split("Bearer ")[1]
-        let user = jwt.verify(header, "s3cr3t")
+        let header = req.headers.authorization.split("Bearer ")[1];
+        let user = jwt.verify(header, "s3cr3t");
         let check = await Users.findOne({
             where: { id: req.params.id, role: "product" },
         });
@@ -14,10 +14,10 @@ async function productDelete(req, res) {
                 { where: { id: req.params.id } }
             );
             res.send("Data product berhasil dihapus");
-            return
+            return;
         }
     } catch (err) {
-        res.send(err)
+        res.send(err);
     }
 }
 
