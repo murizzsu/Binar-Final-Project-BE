@@ -15,6 +15,5 @@ module.exports = {
     // Encrypt and Decrpyt
     encryptPass: require("./encrypt_pass"),
     decryptPass: require("./decrypt_pass"),
-
-
+    
 };

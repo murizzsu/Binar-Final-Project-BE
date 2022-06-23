@@ -1,20 +1,24 @@
-const { Users } = require("../models");
+const { Products } = require("../models");
+const jwt = require("jsonwebtoken");
 
 async function productPut(req, res) {
   try {
-    let check = await Users.findOne({
-      where: { id: req.params.id, role: "product" },
+    let header = req.headers.authorization.split("Bearer ")[1];
+    let user = jwt.verify(header, "s3cr3t");
+
+    let product  = await Products.findBypk({
+      where: { id: req.params.id},
     });
 
-    if (check) {
-      await Users.update(
+    if (product.user_id == user.id) {
+      await Products.update(
         {
-          username: req.body.username,
-          password: req.body.password,
-          role: req.body.role,
-          address: req.body.address,
-          phone_number: req.body.phone_number,
-          fullname: req.body.fullname,
+          id: product.id,
+          category_id: product.category_id,
+          name: product.name,
+          price: product.price,
+          description: product.description,
+          img_url: product.img_url
         },
         { where: { id: req.params.id } }
       );
