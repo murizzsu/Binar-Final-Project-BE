@@ -1,23 +1,23 @@
 stages:
-  - cleancode
-  - test
+  # - cleancode
+  # - test
   - deploy
 
-Cleancode:
-  stage: cleancode
-  image: node:latest
-  script:
-    - npm install
-    - npm run lint
-  allow_failure: true
+# Cleancode:
+#   stage: cleancode
+#   image: node:latest
+#   script:
+#     - npm install
+#     - npm run lint
+#   allow_failure: true
 
-Unit Testing:
-  stage: test
-  image: node:latest
-  script:
-    - npm install
-    - npm run test
-  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+# Unit Testing:
+#   stage: test
+#   image: node:latestS
+#   script:
+#     - npm install
+#     - npm run test
+#   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
 
 Deploy to Heroku:
   stage: deploy

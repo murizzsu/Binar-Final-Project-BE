@@ -3,10 +3,11 @@ const cors = require("cors");
 const app = express();
 const controllers = require("./controllers");
 const swaggerUI = require("swagger-ui-express");
-
+const migrator = require("./migrator")
 
 const {  PORT = 8000 } = process.env;
 
+migrator()
 app.use(cors())
 app.use(express.json())
 
