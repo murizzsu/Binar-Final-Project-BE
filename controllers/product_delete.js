@@ -1,20 +1,23 @@
-const { Users } = require("../models");
+const { Products } = require("../models");
 const jwt = require("jsonwebtoken");
 
 async function productDelete(req, res) {
     try {
         let header = req.headers.authorization.split("Bearer ")[1];
         let user = jwt.verify(header, "s3cr3t");
-        let check = await Users.findOne({
-            where: { id: req.params.id, role: "product" },
-        });
+        const idInput = req.params.id;
+
+        let check = await Products.findByPk(idInput);
+
         if (check) {
-            await Users.update(
-                { is_deleted: true },
-                { where: { id: req.params.id } }
-            );
-            res.send("Data product berhasil dihapus");
-            return;
+            if (check.user_id == user.id) {
+                await Products.destroy({ where: { id: idInput}});
+                res.json({ message: `Product berhasil dihapus`});
+            } else {
+                res.json({ message: "invalid" });
+            }
+        } else {
+            res.json({ message: "invalid"});
         }
     } catch (err) {
         res.send(err);

@@ -2,7 +2,7 @@ const { Products } = require("../models");
 
 async function productGetByID(req, res) {
     try {
-        let idInput = req.params.id;
+        const idInput = req.params.id;
 
         let product = await Products.findByPk(idInput, {
             where: { sold: false },

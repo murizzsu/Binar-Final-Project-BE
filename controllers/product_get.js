@@ -4,6 +4,7 @@ async function productGet(req, res) {
     try {
         let listProducts = await Products.findAll({ where: { sold: false } });
         res.send(listProducts);
+        console.log(listProducts);
       } catch (err) {
         res.send(err);
       }
