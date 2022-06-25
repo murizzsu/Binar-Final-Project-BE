@@ -45,6 +45,9 @@ components:
     Products:
       type: object
       properties:
+        category_id:
+          type: number
+          example: 1
         name:
           type: string
           example: productName
@@ -225,7 +228,7 @@ paths:
         $ref: "#/components/requestBodies/ProductsRequest"
       responses:
         200:
-          $ref: "#/components/responses/ProductsResponse"
+          $ref: "#/components/responses/ProductsByIdResponses"
     get:
       tags:
         - Products
