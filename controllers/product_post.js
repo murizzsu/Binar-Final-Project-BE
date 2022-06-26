@@ -10,7 +10,7 @@ async function productPost(req, res) {
         let priceInput = req.body.price;
         let descriptionInput = req.body.description;
         let img_urlInput = req.body.img_url;
-        console.log(req.body);
+        // console.log(req.body);
         await Products.create({
             user_id: user.id,
             category_id: categoryInput,
@@ -22,12 +22,6 @@ async function productPost(req, res) {
             updated_by: user.id
         });
 
-        // if (product) {
-        //     res.status(201).json({ message: `Product ${nameInput} berhasil dipasang`});
-        // } else {
-        //     res.status(424).json({ message: `Product ${nameInput} sudah ada`});
-        // }
-
         res.status(201).json({
             name: req.body.name,
             price: req.body.price,
@@ -36,7 +30,7 @@ async function productPost(req, res) {
         });
 
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         res.send(err);
     }
 }

@@ -6,25 +6,24 @@ async function productPut(req, res) {
     let header = req.headers.authorization.split("Bearer ")[1];
     let user = jwt.verify(header, "s3cr3t");
     const idInput = req.params.id;
-
     const product = await Products.findByPk(idInput);
 
     if (product.user_id == user.id) {
       if (product) {
-        let productData = {
+        let data = {
           category_id: product.category_id,
           name: product.name,
           price: product.price,
           description: product.description,
           img_url: product.img_url
         };
-        productData = Object.assign(productData, req.body);
+        data = Object.assign(data, req.body);
 
-        const updateProduct = await Products.update(productData, {
+        const productUpdate = await Products.update(data, {
           where: { id: idInput },
         });
 
-        if (updateProduct) {
+        if (productUpdate) {
           res.status(201).json({
             category_id: req.body.category_id,
             name: req.body.name,
@@ -39,7 +38,7 @@ async function productPut(req, res) {
         res.json({ message: "invalid" });
       }
     } else {
-      res.status(403).json({
+      res.json({
         message: "invalid",
       });
     }

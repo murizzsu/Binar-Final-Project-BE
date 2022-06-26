@@ -6,8 +6,7 @@ async function productDelete(req, res) {
         let header = req.headers.authorization.split("Bearer ")[1];
         let user = jwt.verify(header, "s3cr3t");
         const idInput = req.params.id;
-
-        let check = await Products.findByPk(idInput);
+        const check = await Products.findByPk(idInput);
 
         if (check) {
             if (check.user_id == user.id) {

@@ -3,8 +3,7 @@ const { Products } = require("../models");
 async function productGetByID(req, res) {
     try {
         const idInput = req.params.id;
-
-        let product = await Products.findByPk(idInput, {
+        const product = await Products.findByPk(idInput, {
             where: { sold: false },
           });
       
