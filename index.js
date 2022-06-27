@@ -29,6 +29,12 @@ const options = {
         url: "/api-docs"
     }
 };
+app.get("/", (req, res) => {
+    res.status(200).json({
+        status: "OK",
+        message: "Running Success!",
+      });
+});
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(null, options));
 app.get("/api-docs", (req, res) => {
     res.sendFile(__dirname + "/swagger.yaml");
