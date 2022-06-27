@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up (queryInterface, Sequelize) {
     /**
      * Add seed commands here.
      *
@@ -11,8 +11,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-
-    await queryInterface.bulkInsert("categories", [
+     await queryInterface.bulkInsert("categories", [
       {
         name: "Hobi",
         created_at: new Date(),
@@ -41,7 +40,8 @@ module.exports = {
     ]);
   },
 
-  async down(queryInterface, Sequelize) {
+
+  async down (queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *
