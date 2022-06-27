@@ -16,4 +16,6 @@ module.exports = {
     encryptPass: require("./encrypt_pass"),
     decryptPass: require("./decrypt_pass"),
     
+    // Authenticator
+    authenticator: require("./authenticator")
 };

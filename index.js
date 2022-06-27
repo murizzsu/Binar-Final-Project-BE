@@ -16,11 +16,11 @@ app.post("/api/v1/login", controllers.login);
 app.post("/api/v1/register", controllers.register);
 
 // products
-app.post("/api/v1/products", controllers.productPost);
+app.post("/api/v1/products", controllers.authenticator, controllers.productPost);
 app.get("/api/v1/products", controllers.productGet);
 app.get("/api/v1/products/:id", controllers.productGetByID);
-app.put("/api/v1/products/:id", controllers.productPut);
-app.delete("/api/v1/products/:id", controllers.productDelete);
+app.put("/api/v1/products/:id", controllers.authenticator, controllers.productPut);
+app.delete("/api/v1/products/:id", controllers.authenticator, controllers.productDelete);
 
 
 // https://www.npmjs.com/package/swagger-ui-express
