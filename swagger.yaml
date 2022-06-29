@@ -12,6 +12,7 @@ tags:
 
 servers:
   - url: http://localhost:8000
+  - url: https://backend-2-binar-final-ch.herokuapp.com/ 
 
 components:
   schemas:
