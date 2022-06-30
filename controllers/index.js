@@ -1,21 +1,21 @@
 module.exports = {
     // Login
-    login: require("./login"),
+    login: require("./user/login"),
 
     // Register
-    register: require("./register"),
+    register: require("./user/register"),
 
     // Product
-    productPost: require("./product_post"),
-    productGet: require("./product_get"),
-    productGetByID: require("./product_get_id"),
-    productPut: require("./product_put"),
-    productDelete: require("./product_delete"),
+    productPost: require("./product/product_post"),
+    productGet: require("./product/product_get"),
+    productGetByID: require("./product/product_get_id"),
+    productPut: require("./product/product_put"),
+    productDelete: require("./product/product_delete"),
 
     // Encrypt and Decrpyt
-    encryptPass: require("./encrypt_pass"),
-    decryptPass: require("./decrypt_pass"),
+    encryptPass: require("./encrypt-decrypt/encrypt_pass"),
+    decryptPass: require("./encrypt-decrypt/decrypt_pass"),
     
     // Authenticator
-    authenticator: require("./authenticator")
+    authenticator: require("./middleware/authenticator")
 };
