@@ -22,6 +22,10 @@ async function login(req, res) {
           id: validation.id, 
           email: validation.email,
         };
+        // let user = {
+        //   ...validation
+        // };
+        // user.password = undefined;
         let token = jwt.sign(user, "s3cr3t");
         res.status(200).json({
           token: token,
