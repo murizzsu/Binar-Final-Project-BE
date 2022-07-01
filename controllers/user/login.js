@@ -21,6 +21,11 @@ async function login(req, res) {
         let user = {
           id: validation.id, 
           email: validation.email,
+          img_url: validation.img_url,
+          name: validation.name,
+          city: validation.city,
+          address: validation.address,
+          phone: validation.phone
         };
         // let user = {
         //   ...validation
@@ -28,6 +33,7 @@ async function login(req, res) {
         // user.password = undefined;
         let token = jwt.sign(user, "s3cr3t");
         res.status(200).json({
+          user: user,
           token: token,
         });
         return;

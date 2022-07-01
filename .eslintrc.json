@@ -11,5 +11,6 @@
     "rules": {
         "semi": "error",
         "no-unused-vars": "off"
-    }
+    },
+    "eslintIgnore": ["*.spec.js", "*.test.js"]
 }
