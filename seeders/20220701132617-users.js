@@ -1,5 +1,5 @@
 'use strict';
-const encryptPass = require("../controllers/encrypt-decrypt/encrypt_pass")
+const encryptPass = require("../controllers/encrypt-decrypt/encrypt_pass");
 module.exports = {
   async up (queryInterface, Sequelize) {
     /**
@@ -33,6 +33,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-     await queryInterface.bulkDelete('users', null, {})
+     await queryInterface.bulkDelete('users', null, {});
   }
 };
