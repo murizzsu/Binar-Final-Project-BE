@@ -13,7 +13,7 @@ Cleancode:
 
 Unit Testing:
   stage: test
-  image: node:latestS
+  image: node:latest
   script:
     - npm install
     - npm run test
