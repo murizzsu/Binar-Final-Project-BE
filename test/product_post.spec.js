@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { Users } = require("../models");
+const { Images } = require("../models")
 const product_post = require("../controllers/product/product_post");
 const authenticator = require("../controllers/middleware/authenticator");
 const migrator = require("../migrator");
@@ -29,22 +30,23 @@ describe("test product_post", () => {
             phone: validation.phone
         };
         let token = jwt.sign(user, "s3cr3t");
-        let product = {
+        let Product = {
             "id": 1,
             "user_id": 1,
             "category_id": 1,
             "name": "productName",
             "price": 100000.1,
             "description": "productDescription",
-            "img_url": "http://xyz.png",
+            // "img_url": "http://xyz.png",
             "sold": false,
         }
+
         const response = await request(app)
             .post("/api/v1/products")
             .set("Content-Type", "application/json")
             .set("authorization", `Bearer ${token}`)
-            .send(product)
+            .send(Product)
             .expect(201)
-        expect(response.body.name).toEqual(product.name);
+        expect(response.body.name).toEqual(Product.name);
     })
 })

@@ -16,6 +16,8 @@ module.exports = {
     encryptPass: require("./encrypt-decrypt/encrypt_pass"),
     decryptPass: require("./encrypt-decrypt/decrypt_pass"),
     
-    // Authenticator
-    authenticator: require("./middleware/authenticator")
+    // Middleware
+    authenticator: require("./middleware/authenticator"),
+    imageUpload: require("./middleware/image_upload"),
+    imagePost: require("./middleware/image_post"),
 };

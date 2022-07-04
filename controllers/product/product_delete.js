@@ -13,7 +13,7 @@ async function productDelete(req, res) {
                 await Products.destroy({ where: { id: idInput}});
                 res.json({ message: `Product berhasil dihapus`});
             } else {
-                res.json({ message: "Product tidak berhasil dihapus karena Anda bukan pemiliknya" });
+                res.json({ message: "Product tidak dapat dihapus karena Anda bukan pemiliknya" });
             }
         } else {
             res.status(404).json({ message: "Product tidak ditemukan"});

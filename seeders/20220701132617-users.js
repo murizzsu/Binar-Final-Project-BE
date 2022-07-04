@@ -15,7 +15,6 @@ module.exports = {
       {
         email: "rizky@gmail.com",
         password: await encryptPass("12345"),
-        img_url: "photo.png",
         name: "Rizky",
         city: "Jakarta",
         address: "Jakarta",

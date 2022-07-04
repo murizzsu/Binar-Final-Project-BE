@@ -15,7 +15,7 @@ async function productPut(req, res) {
           name: product.name,
           price: product.price,
           description: product.description,
-          img_url: product.img_url
+          // img_url: product.img_url
         };
         data = Object.assign(data, req.body);
 
@@ -24,22 +24,16 @@ async function productPut(req, res) {
         });
 
         if (productUpdate) {
-          res.status(201).json({
-            category_id: req.body.category_id,
-            name: req.body.name,
-            price: req.body.price,
-            description: req.body.description,
-            img_url: req.body.img_url,
-          });
+          res.json({ message: `Product dengan ${data.name} berhasil diperbarui` });
         } else {
-          res.json({ message: "invalid" });
+          res.json({ message: `Product dengan ${data.name} tidak berhasil diperbarui` });
         }
       } else {
-        res.json({ message: "invalid" });
+        res.json({ message: "Product tidak ditemukan" });
       }
     } else {
       res.json({
-        message: "invalid",
+        message: "Product tidak dapat diperbarui karena Anda bukan pemiliknya",
       });
     }
   } catch (err) {

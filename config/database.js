@@ -21,13 +21,13 @@ module.exports = {
     database: DB_NAME,
     host: DB_HOST,
     port: DB_PORT,
-    ssl: true,
-    dialectOptions: {
-        ssl: {
-          require: true,
-          rejectUnauthorized: false,
-        },
-      },
+    // ssl: true,
+    // dialectOptions: {
+    //     ssl: {
+    //       require: true,
+    //       rejectUnauthorized: false,
+    //     },
+    //   },
     dialect: "postgres",
   },
   test: {
