@@ -17,7 +17,7 @@ async function productPost(req, res) {
         const imageInput = req.body.image;
         // let img_urlInput = req.body.img_url;
 
-        const Product = await Products.create({productInput});
+        const Product = await Products.create(productInput);
 
         // await Products.create({
         //     user_id: user.id,

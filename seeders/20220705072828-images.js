@@ -11,42 +11,35 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    //  await queryInterface.bulkDelete("categories", {});
-     await queryInterface.bulkInsert("categories", [
+    //  await queryInterface.bulkDelete("images", {product_id:1}, {});
+     await queryInterface.bulkInsert("images", [
       {
-        id:1,
-        name: "Hobi",
+        name: "Images_product_1-1",
+        product_id: 1,
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        id:2,
-        name: "Kendaraan",
+        name: "Images_product_1-2",
+        product_id: 1,
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        id:3,
-        name: "Baju",
+        name: "Images_product_1-3",
+        product_id: 1,
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        id:4,
-        name: "Elektronik",
-        created_at: new Date(),
-        updated_at: new Date(),
-      },
-      {
-        id:5,
-        name: "Kesehatan",
+        name: "Images_product_1-4",
+        product_id: 1,
         created_at: new Date(),
         updated_at: new Date(),
       },
     ]);
   },
-
-
+  
   async down (queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.

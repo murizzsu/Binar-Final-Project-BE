@@ -1,5 +1,5 @@
 'use strict';
-const encryptPass = require("../controllers/encrypt-decrypt/encrypt_pass");
+
 module.exports = {
   async up (queryInterface, Sequelize) {
     /**
@@ -11,16 +11,11 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-     await queryInterface.bulkDelete("users", {id:1});
-     await queryInterface.bulkInsert("users", [
+     await queryInterface.bulkInsert("notifications", [
       {
-        id: 1,
-        email: "rizky@gmail.com",
-        password: await encryptPass("12345"),
-        name: "Rizky",
-        city: "Jakarta",
-        address: "Jakarta",
-        phone: "082224442331",
+        user_id: 1,
+        product_id: 1,
+        title: "Berhasil diterbitkan",
         created_at: new Date(),
         updated_at: new Date(),
       },
@@ -34,6 +29,5 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    //  await queryInterface.bulkDelete('users', null, {});
   }
 };

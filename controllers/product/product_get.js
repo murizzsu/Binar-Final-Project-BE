@@ -44,7 +44,8 @@ async function productGet(req, res) {
         }
       }
       products.push(data);
-    }
+    } 
+    res.send(products);
   } catch (err) {
     res.send(err);
   }

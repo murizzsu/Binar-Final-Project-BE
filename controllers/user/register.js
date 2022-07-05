@@ -4,7 +4,7 @@ const encryptFunction = require("../encrypt-decrypt/encrypt_pass");
 async function register(req, res) {
   try {
     let nameInput = req.body.name;
-    console.log(req.body);
+    // console.log(req.body);
     let emailInput = req.body.email;
     let passwordInput = await encryptFunction(req.body.password);
     // let imgInput = req.body.img_url;
