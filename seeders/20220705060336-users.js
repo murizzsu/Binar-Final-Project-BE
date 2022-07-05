@@ -11,8 +11,10 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+     await queryInterface.bulkDelete("users", {id:1});
      await queryInterface.bulkInsert("users", [
       {
+        id: 1,
         email: "rizky@gmail.com",
         password: await encryptPass("12345"),
         name: "Rizky",
@@ -32,6 +34,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-     await queryInterface.bulkDelete('users', null, {});
+    //  await queryInterface.bulkDelete('users', null, {});
   }
 };

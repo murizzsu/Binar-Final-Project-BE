@@ -23,7 +23,7 @@ describe("test login", () => {
         .send(validUser)
         .expect(200)
         .then((res) => {
-            expect(res.body.token).toBeTruthy();
+            expect(res.body).toBeTruthy();
             done()
         })
         .catch(done);

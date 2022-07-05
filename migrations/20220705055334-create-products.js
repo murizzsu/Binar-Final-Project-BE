@@ -23,9 +23,6 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
-      // img_url: {
-      //   type: Sequelize.STRING
-      // },
       sold: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,

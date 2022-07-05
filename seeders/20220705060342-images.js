@@ -11,7 +11,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-     await queryInterface.bulkDelete('images', {product_id:1}, {});
+     await queryInterface.bulkDelete("images", {product_id:1}, {});
      await queryInterface.bulkInsert("images", [
       {
         id: 1,
