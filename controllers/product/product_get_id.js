@@ -46,7 +46,7 @@ async function productGetByID(req, res) {
             }
             res.send(data);
         } else {
-            res.json({ message: "Product tidak ditemukan" });
+            res.json({ message: "Barang tidak ditemukan" });
         }
     } catch (err) {
         res.send(err);

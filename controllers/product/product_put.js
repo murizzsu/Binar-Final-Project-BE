@@ -15,7 +15,6 @@ async function productPut(req, res) {
           name: product.name,
           price: product.price,
           description: product.description,
-          // img_url: product.img_url
         };
         data = Object.assign(data, req.body);
 
@@ -24,16 +23,16 @@ async function productPut(req, res) {
         });
 
         if (productUpdate) {
-          res.json({ message: `Product dengan ${data.name} berhasil diperbarui` });
+          res.json({ message: `Barang dengan ${data.name} berhasil diperbarui` });
         } else {
-          res.json({ message: `Product dengan ${data.name} tidak berhasil diperbarui` });
+          res.json({ message: `Barang dengan ${data.name} tidak berhasil diperbarui` });
         }
       } else {
-        res.json({ message: "Product tidak ditemukan" });
+        res.json({ message: "Barang tidak ditemukan" });
       }
     } else {
       res.json({
-        message: "Product tidak dapat diperbarui karena Anda bukan pemiliknya",
+        message: "Barang tidak dapat diperbarui karena Anda bukan pemiliknya",
       });
     }
   } catch (err) {

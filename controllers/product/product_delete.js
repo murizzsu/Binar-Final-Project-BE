@@ -11,12 +11,12 @@ async function productDelete(req, res) {
         if (check) {
             if (check.user_id == user.id) {
                 await Products.destroy({ where: { id: idInput}});
-                res.json({ message: `Product berhasil dihapus`});
+                res.json({ message: `Barang berhasil dihapus`});
             } else {
-                res.json({ message: "Product tidak dapat dihapus karena Anda bukan pemiliknya" });
+                res.json({ message: "Barang tidak dapat dihapus karena Anda bukan pemiliknya" });
             }
         } else {
-            res.status(404).json({ message: "Product tidak ditemukan"});
+            res.status(404).json({ message: "Barang tidak ditemukan"});
         }
     } catch (err) {
         res.send(err);

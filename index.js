@@ -12,14 +12,14 @@ app.use(express.json());
 // users
 app.post("/api/v1/login", controllers.login);
 app.post("/api/v1/register", controllers.register);
-app.post("/api/v1/usersimageupload", controllers.authenticator, controllers.imageUpload.users, controllers.imagePost);
+app.post("/api/v1/usersimageupload", controllers.authenticator, controllers.imageUpload.users, controllers.usersImagePost);
 app.put("/api/v1/profil", controllers.authenticator, controllers.profil);
 app.get("/api/v1/products/sold",controllers.authenticator,controllers.soldProduct);
 app.get("/api/v1/products/sale",controllers.authenticator, controllers.saleProduct);
 
 // products
 app.post("/api/v1/products", controllers.authenticator, controllers.productPost);
-app.post("/api/v1/productsimageupload", controllers.authenticator, controllers.imageUpload.products, controllers.imagePost);
+app.post("/api/v1/productsimageupload", controllers.authenticator, controllers.imageUpload.products, controllers.productsImagePost);
 app.get("/api/v1/products", controllers.productGet);
 app.get("/api/v1/products/:id", controllers.productGetByID);
 app.put("/api/v1/products/:id", controllers.authenticator, controllers.productPut);

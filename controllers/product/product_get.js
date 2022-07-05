@@ -3,9 +3,8 @@ const { Products, Users, Categories, Images } = require("../../models");
 async function productGet(req, res) {
   try {
     const productsList = await Products.findAll({ where: { sold: false } });
-    // res.send(productsList);
     const imagesList = await Images.findAll();
-    // console.log(productsList);
+    
     const products = [];
 
     for (let i in productsList) {

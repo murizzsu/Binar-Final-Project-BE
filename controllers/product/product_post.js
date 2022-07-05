@@ -15,20 +15,8 @@ async function productPost(req, res) {
         };
 
         const imageInput = req.body.image;
-        // let img_urlInput = req.body.img_url;
 
         const Product = await Products.create(productInput);
-
-        // await Products.create({
-        //     user_id: user.id,
-        //     category_id: categoryInput,
-        //     name: nameInput,
-        //     price: priceInput,
-        //     description: descriptionInput,
-        //     img_url: img_urlInput,
-        //     created_by: user.id,
-        //     updated_by: user.id
-        // });
 
         if (Product) {
             for (let i in imageInput) {
@@ -40,18 +28,17 @@ async function productPost(req, res) {
             
             res.status(201).json({
                 name: req.body.name,
-                message: `Product dengan ${productInput.name} berhasil dibuat`
+                message: `Barang dengan ${productInput.name} berhasil dibuat`
                 
              });
         } else {
             res.json({ 
-                message: `Product dengan ${productInput.name} tidak berhasil dibuat`
+                message: `Barang dengan ${productInput.name} tidak berhasil dibuat`
             });
         }
 
 
     } catch (err) {
-        // console.log(err);
         res.send(err);
     }
 }

@@ -1,4 +1,4 @@
-function imagePost(req, res) {
+function usersImagePost(req, res) {
     try {
         res.status(200).json({
             path: req.file.path,
@@ -10,4 +10,4 @@ function imagePost(req, res) {
     }
 }
 
-module.exports = imagePost;
+module.exports = usersImagePost;

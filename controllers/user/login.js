@@ -27,10 +27,6 @@ async function login(req, res) {
           address: validation.address,
           phone: validation.phone
         };
-        // let user = {
-        //   ...validation
-        // };
-        // user.password = undefined;
         let token = jwt.sign(user, "s3cr3t");
         res.status(200).json({
           user: user,
@@ -38,7 +34,7 @@ async function login(req, res) {
         });
         return;
       } else {
-        res.send("invalid");
+        res.send("email atau password tidak sesuai");
       }
     } else {
       res.send("invalid");

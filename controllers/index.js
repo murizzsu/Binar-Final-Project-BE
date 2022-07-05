@@ -19,7 +19,9 @@ module.exports = {
     // Middleware
     authenticator: require("./middleware/authenticator"),
     imageUpload: require("./middleware/image_upload"),
-    imagePost: require("./middleware/image_post"),
+    usersImagePost: require("./middleware/users-image_post"),
+    productsImagePost: require("./middleware/products-image_post"),
+
 
     // User
     profil: require("./user/profil"),
