@@ -3,11 +3,9 @@ const cors = require("cors");
 const app = express();
 const controllers = require("./controllers");
 const swaggerUI = require("swagger-ui-express");
-// const migrator = require("./migrator");
 
 const {  PORT = 8000 } = process.env;
 
-// migrator();
 app.use(cors());
 app.use(express.json());
 
@@ -15,6 +13,9 @@ app.use(express.json());
 app.post("/api/v1/login", controllers.login);
 app.post("/api/v1/register", controllers.register);
 app.post("/api/v1/usersimageupload", controllers.authenticator, controllers.imageUpload.users, controllers.imagePost);
+app.put("/api/v1/profil", controllers.authenticator, controllers.profil);
+app.get("/api/v1/products/sold",controllers.authenticator,controllers.soldProduct);
+app.get("/api/v1/products/sale",controllers.authenticator, controllers.saleProduct);
 
 // products
 app.post("/api/v1/products", controllers.authenticator, controllers.productPost);

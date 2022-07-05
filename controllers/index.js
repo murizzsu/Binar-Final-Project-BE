@@ -20,4 +20,10 @@ module.exports = {
     authenticator: require("./middleware/authenticator"),
     imageUpload: require("./middleware/image_upload"),
     imagePost: require("./middleware/image_post"),
+
+    // User
+    profil: require("./user/profil"),
+    saleProduct: require("./user/product_sale"),
+    soldProduct: require("./user/product_sold"),
+
 };

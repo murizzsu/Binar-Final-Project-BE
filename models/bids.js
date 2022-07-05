@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   Bids.init({
     product_id: DataTypes.INTEGER,
     user_id: DataTypes.INTEGER,
-    requestPrice: DataTypes.FLOAT
+    requestPrice: DataTypes.FLOAT,
+    status: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Bids',

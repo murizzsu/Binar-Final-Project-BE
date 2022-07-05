@@ -17,6 +17,9 @@ module.exports = {
       requestPrice: {
         type: Sequelize.FLOAT
       },
+      status: {
+        type: Sequelize.BOOLEAN
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE

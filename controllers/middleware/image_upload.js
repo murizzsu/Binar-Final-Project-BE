@@ -39,8 +39,8 @@ const UsersImageUpload = multer({ storage: usersStorage });
 const ProductsImageUpload  = multer({ storage: productsStorage});
 
 module.exports = {
-    users : UsersImageUpload.single("file"),
-    products : ProductsImageUpload.single("file"),
+    users : UsersImageUpload.fields([{ name: "file1", maxCount: 10}, { name: "file2", maxCount: 10}, { name: "file3", maxCount: 10}, { name: "file4", maxCount: 10}]),
+    products : ProductsImageUpload.fields([{ name: "file1", maxCount: 10}, { name: "file2", maxCount: 10}, { name: "file3", maxCount: 10}, { name: "file4", maxCount: 10}]),
 };
 
 
