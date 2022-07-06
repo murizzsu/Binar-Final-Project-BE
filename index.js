@@ -16,6 +16,7 @@ app.post("/api/v1/usersimageupload", controllers.authenticator, controllers.imag
 app.put("/api/v1/profil", controllers.authenticator, controllers.profil);
 app.get("/api/v1/products/sold",controllers.authenticator,controllers.soldProduct);
 app.get("/api/v1/products/sale",controllers.authenticator, controllers.saleProduct);
+app.get("/api/v1/products/bid", controllers.authenticator, controllers.bidProduct);
 
 // products
 app.post("/api/v1/products", controllers.authenticator, controllers.productPost);
@@ -24,7 +25,6 @@ app.get("/api/v1/products", controllers.productGet);
 app.get("/api/v1/products/:id", controllers.productGetByID);
 app.put("/api/v1/products/:id", controllers.authenticator, controllers.productPut);
 app.delete("/api/v1/products/:id", controllers.authenticator, controllers.productDelete);
-
 
 // https://www.npmjs.com/package/swagger-ui-express
 const options = {

@@ -27,5 +27,6 @@ module.exports = {
     profil: require("./user/profil"),
     saleProduct: require("./user/product_sale"),
     soldProduct: require("./user/product_sold"),
+    bidProduct : require("./user/product_bid"),
 
 };
