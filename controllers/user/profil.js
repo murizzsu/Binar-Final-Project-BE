@@ -32,7 +32,7 @@ async function profil(req, res) {
           where: { id: user.id },
         }
       );
-      res.json({
+      res.send({
         message: "Profil berhasil diperbarui",
       });
     }

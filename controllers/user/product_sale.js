@@ -14,13 +14,13 @@ async function saleProduct(req, res) {
           if (!productsList.length == 0) {
             res.status(200).send(productsList);
           } else {
-            res.json("Belum ada barang yang dijual");
+            res.send("Belum ada barang yang dijual");
           }
         } else {
-          res.json("Barang tidak ditemukan");
+          res.send("Barang tidak ditemukan");
         }
       } catch (err) {
-        res.json({
+        res.send({
           message: err,
         });
       }

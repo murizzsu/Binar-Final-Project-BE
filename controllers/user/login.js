@@ -21,7 +21,6 @@ async function login(req, res) {
         let user = {
           id: validation.id, 
           email: validation.email,
-          img_url: validation.img_url,
           name: validation.name,
           city: validation.city,
           address: validation.address,
@@ -37,7 +36,7 @@ async function login(req, res) {
         res.send("email atau password tidak sesuai");
       }
     } else {
-      res.send("invalid");
+      res.send("email atau password tidak sesuai");
     }
   } catch (err) {
     res.send(err);

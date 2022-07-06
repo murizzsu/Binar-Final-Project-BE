@@ -18,6 +18,7 @@ async function register(req, res) {
       email: user.email,
       created_at: user.createdAt,
       updated_at: user.updatedAt,
+      message: `Email kamu berhasil terdaftar`
     });
   } catch (err) {
     res.send(err);

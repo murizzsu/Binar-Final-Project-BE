@@ -9,10 +9,12 @@ tags:
     description: ------
   - name: Products
     description: ------
+  - name: Users
+    description: ------
 
 servers:
   - url: http://localhost:8000
-  - url: https://backend-2-binar-final-ch.herokuapp.com/ 
+  - url: https://backend-2-binar-final-ch.herokuapp.com
 
 components:
   schemas:
@@ -43,9 +45,57 @@ components:
         password:
           type: string
           example: 12345
+    ProfilData:
+      type: object
+      properties:
+        name:
+          type: string
+          example: name
+        email:
+          type: string
+          example: name@gmail.com
+        password:
+          type: string
+          example: 12345
+        city:
+          type: string
+          example: city
+        address:
+          type: string
+          example: city 
+        phone:
+          type: string
+          example: 085754210823 
+    ProfilDataRes:
+      type: object
+      properties:
+        name:
+          type: string
+          example: name
+        email:
+          type: string
+          example: name@gmail.com
+        password:
+          type: string
+          example: 12345
+        city:
+          type: string
+          example: city
+        address:
+          type: string
+          example: city 
+        phone:
+          type: string
+          example: 085754210823 
+        image:
+          type: string
+          example: users-image_1
     Products:
       type: object
       properties:
+        user_id:
+          type: number
+          example: 1
         category_id:
           type: number
           example: 1
@@ -59,9 +109,17 @@ components:
         description:
           type: string
           example: productDescription
-        img_url:
-          type: string
-          example: http://xyz.png
+        # images:
+        #   type: array
+        #   items:
+        #     type: string
+        #   example: 
+        #     [
+        #     "Images_product_1-1",
+        #     "Images_product_1-2",
+        #     "Images_product_1-3",
+        #     "Images_product_1-4"
+        #     ]
     ProductsId:
       type: object
       properties:
@@ -84,17 +142,25 @@ components:
         description:
           type: string
           example: productDescription
-        img_url:
-          type: string
-          example: http://xyz.png
         sold:
           type: boolean
           example: false
+        images:
+          type: array
+          items:
+            type: string
+          example: 
+            [
+            "Images_product_1-1",
+            "Images_product_1-2",
+            "Images_product_1-3",
+            "Images_product_1-4"
+            ]
         created_at:
           type: number
           format: datetime
           example: 1970-01-01 00:00:01
-        update_at:
+        updated_at:
           type: number
           format: datetime
           example: 1970-01-01 00:00:01
@@ -109,12 +175,22 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/RegisterData"
+    ProfilRequest:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProfilData"
     ProductsRequest:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/Products"
     ProductsRequestId:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProductsId"
+    ProductsRequestputId:
       content:
         application/json:
           schema:
@@ -126,6 +202,12 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/LoginToken"
+    ProfilResponse:
+      description: ok
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProfilDataRes"
     ProductResponse:
       description: PostProducts
       content:
@@ -141,7 +223,7 @@ components:
             items:
               $ref: "#/components/schemas/Products"
             example:
-              DefaultSample:
+              DefaultSample: 
               value:
                 - id: 1
                   user_id: 1
@@ -149,8 +231,13 @@ components:
                   name: productName1
                   price: 100000.1
                   description: productDescription1
-                  img_url: http://xyz.png
                   sold: false
+                  image: [
+                    "Images_product_1-1",
+                    "Images_product_1-2",
+                    "Images_product_1-3",
+                    "Images_product_1-4"
+                    ]
                   created_at: 1970-01-01 00:00:01
                   update_at: 1970-01-01 00:00:01
                 - id: 2
@@ -159,8 +246,13 @@ components:
                   name: productName2
                   price: 100000.2
                   description: productDescription2
-                  img_url: http://xyz.png
                   sold: false
+                  image: [
+                    "Images_product_2-1",
+                    "Images_product_2-2",
+                    "Images_product_2-3",
+                    "Images_product_2-4"
+                    ]
                   created_at: 1970-02-02 00:00:02
                   update_at: 1970-02-02 00:00:02
                 - id: 3
@@ -169,10 +261,15 @@ components:
                   name: productName3
                   price: 100000.3
                   description: productDescription3
-                  img_url: http://xyz.png
                   sold: false
+                  image: [
+                    "Images_product_3-1",
+                    "Images_product_3-2",
+                    "Images_product_3-3",
+                    "Images_product_3-4"
+                    ]
                   created_at: 1970-03-03 00:00:03
-                  update_at: 1970-03-03 00:00:03
+                  updated_at: 1970-03-03 00:00:03
     ProductsByIdResponses:
       description: ok
       content:
@@ -217,6 +314,44 @@ paths:
         200:
           description: Success
 
+  /api/v1/profil:
+    put:
+      tags:
+        - Users
+      summary: Put Profil Users endpoint
+      description: Put Profil Users endpoint
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/ProfilRequest"
+      responses:
+        200:
+          $ref: "#/components/responses/ProfilResponse"
+          
+  /api/v1/products/sale:
+    get:
+      tags:
+        - Users
+      summary: Get Products sale by user
+      description: Get Products sale by user
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          $ref: "#/components/responses/ProductsByIdResponses"
+          
+  /api/v1/products/sold:
+    get:
+      tags:
+        - Users
+      summary: Get Products sold by user
+      description: Get Products sold by user
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: success
+          
   /api/v1/products:
     post:
       tags:
@@ -269,7 +404,7 @@ paths:
       security:
         - bearerAuth: []
       requestBody:
-        $ref: "#/components/requestBodies/ProductsRequestId"
+        $ref: "#/components/requestBodies/ProductsRequest"
       responses:
         200:
           $ref: "#/components/responses/PutProductsByIDResponses"
