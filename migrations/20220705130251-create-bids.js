@@ -14,7 +14,7 @@ module.exports = {
       user_id: {
         type: Sequelize.INTEGER
       },
-      requestPrice: {
+      request_price: {
         type: Sequelize.FLOAT
       },
       status: {
