@@ -18,9 +18,24 @@ servers:
 
 components:
   schemas:
-    LoginToken:
+    Login:
       type: object
       properties:
+        # id:
+        #   type: number
+        #   example: 1
+        # name:
+        #   type: string
+        #   example: name
+        # city:
+        #   type: string
+        #   example: city
+        # address:
+        #   type: string
+        #   example: city 
+        # phone:
+        #   type: string
+        #   example: 085754210823 
         token:
           type: string
           example: 2log16x25A
@@ -87,6 +102,27 @@ components:
         phone:
           type: string
           example: 085754210823 
+        image:
+          type: string
+          example: users-image_1
+    CurrentUser:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+        name:
+          type: string
+          example: name
+        city:
+          type: string
+          example: city
+        address:
+          type: string
+          example: city 
+        phone:
+          type: string
+          example: 085754210823
         image:
           type: string
           example: users-image_1
@@ -201,13 +237,19 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/LoginToken"
+            $ref: "#/components/schemas/Login"
     ProfilResponse:
       description: ok
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/ProfilDataRes"
+    CurrentUserResponse:
+      description: ok
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CurrentUser"
     ProductResponse:
       description: PostProducts
       content:
@@ -282,7 +324,7 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/ProductsId"
-
+  
   securitySchemes:
     bearerAuth:
       type: http
@@ -328,6 +370,38 @@ paths:
         200:
           $ref: "#/components/responses/ProfilResponse"
           
+  /api/v1/currentuser:
+    get:
+      tags:
+        - Users
+      summary: Get Current User
+      description: Get Current User
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          $ref: '#/components/responses/CurrentUserResponse'
+  
+  /api/v1/usersimageupload:
+    post:
+      tags:
+        - Users
+      summary: Uploads image's user
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: succes
+
   /api/v1/products/sale:
     get:
       tags:
@@ -351,7 +425,7 @@ paths:
       responses:
         200:
           description: success
-          
+    
   /api/v1/products:
     post:
       tags:
@@ -425,5 +499,27 @@ paths:
       responses:
         200:
           description: delete
+          
+  /api/v1/productsimageupload:
+    post:
+      tags:
+        - Products
+      summary: Uploads image's products
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        200:
+          description: succes
 
   

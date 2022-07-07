@@ -22,11 +22,10 @@ module.exports = {
     usersImagePost: require("./middleware/users-image_post"),
     productsImagePost: require("./middleware/products-image_post"),
 
-
     // User
     profil: require("./user/profil"),
     saleProduct: require("./user/product_sale"),
     soldProduct: require("./user/product_sold"),
     bidProduct : require("./user/product_bid"),
-
+    currentUser: require("./user/current_user")
 };
