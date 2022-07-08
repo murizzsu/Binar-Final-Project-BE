@@ -6,9 +6,10 @@ async function authenticator(req, res, next) {
     try {
         let header = req.headers.authorization.split("Bearer ")[1];
         console.log(header);
-        let user = jwt.verify(header, "s3cr3t");
-        let check = await Users.findByPk(user.id);
-        if (check) {
+        let payload = jwt.verify(header, "s3cr3t");
+        let user = await Users.findByPk(payload.id);
+        if (user) {
+            req.user = user
             next();
             return;
         } else {

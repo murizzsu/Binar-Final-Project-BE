@@ -27,5 +27,8 @@ module.exports = {
     saleProduct: require("./user/product_sale"),
     soldProduct: require("./user/product_sold"),
     bidProduct : require("./user/product_bid"),
-    currentUser: require("./user/current_user")
+    currentUser: require("./user/current_user"),
+
+    // Bids
+    GetProductBid: require('./bids/get_product_bid'),
 };
