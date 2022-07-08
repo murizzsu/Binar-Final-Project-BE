@@ -28,7 +28,8 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     price: DataTypes.FLOAT,
     description: DataTypes.STRING,
-    sold: DataTypes.BOOLEAN
+    // sold: DataTypes.BOOLEAN,
+    status: DataTypes.ENUM('open_for_bid', 'waiting_for_bid', 'sold'),
   }, {
     sequelize,
     modelName: 'Products',

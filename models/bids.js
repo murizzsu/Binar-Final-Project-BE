@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     product_id: DataTypes.INTEGER,
     user_id: DataTypes.INTEGER,
     request_price: DataTypes.FLOAT,
-    status: DataTypes.BOOLEAN
+    status: DataTypes.ENUM('pending', 'accepted', 'rejected')
   }, {
     sequelize,
     modelName: 'Bids',

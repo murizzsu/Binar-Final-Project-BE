@@ -19,7 +19,6 @@ module.exports = {
         name: "Sepatu",
         price: "150000.1",
         description: "Ini Sepatu Murah",
-        sold: false,
         created_at: new Date(),
         updated_at: new Date(),
       },

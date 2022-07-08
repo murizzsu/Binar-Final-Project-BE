@@ -1,5 +1,6 @@
 const { Error4xx, Error500 } = require('../../helpers/response/error')
 const { Success200 } = require('../../helpers/response/success')
+const sequelize = require('sequelize')
 const { Bids, Products, Categories, Users, Images } = require('../../models')
 
 const NewResponseProductBids = (product) => {
@@ -8,7 +9,7 @@ const NewResponseProductBids = (product) => {
         name: product.name,
         price: product.price,
         description: product.description,
-        sold: product.sold,
+        status: product.status,
         category: {
             categoryId: product.category.id,
             categoryName: product.category.name,
@@ -23,7 +24,7 @@ const NewResponseProductBids = (product) => {
                 city: bid.user.city,
                 address: bid.user.address,
                 phone: bid.user.phone,
-                image: bid.user.image.name,
+                image: bid.user.image?.name,
             }
         }))
     }
@@ -66,7 +67,7 @@ const GetProductBid = async (req, res) => {
     try{
         const { productId } = req.params
         const currentUser = req.user 
-        
+
         const product = await Products.findOne({
             where: {
                 id: productId,
@@ -87,7 +88,13 @@ const GetProductBid = async (req, res) => {
                     model: Categories,
                     as: 'category'
                 }
-            ]
+            ],
+            order: sequelize.literal(`(
+                CASE 
+                WHEN "bids"."status" = 'accepted' THEN 1 
+                WHEN "bids"."status" = 'pending'  THEN 2 
+                ELSE 3 END
+            ) ASC`)
         })
 
         if (product.user_id !== currentUser.id){
