@@ -1,10 +1,11 @@
 const { Products, Users, Categories, Images } = require("../../models");
+const { OPEN_FOR_BID } = require('../../helpers/database/enums');
 
 async function productGetByID(req, res) {
     try {
         const idInput = req.params.id;
         const product = await Products.findByPk(idInput, {
-            where: { sold: false },
+            where: { status: OPEN_FOR_BID },
         });
 
         if (product) {
@@ -21,7 +22,7 @@ async function productGetByID(req, res) {
                     name: product.name,
                     price: product.price,
                     description: product.description,
-                    sold: product.sold,
+                    status: product.status,
                     images: [],
                 };
             } else {
@@ -32,7 +33,7 @@ async function productGetByID(req, res) {
                     name: product.name,
                     price: product.price,
                     description: product.description,
-                    sold: product.sold,
+                    status: product.status,
                     images: [],
                 };
             }

@@ -1,8 +1,9 @@
 const { Products, Users, Categories, Images } = require("../../models");
+const { OPEN_FOR_BID } = require('../../helpers/database/enums');
 
 async function productGet(req, res) {
   try {
-    const productsList = await Products.findAll({ where: { sold: false } });
+    const productsList = await Products.findAll({ where: { status: OPEN_FOR_BID } });
     const imagesList = await Images.findAll();
     
     const products = [];
@@ -21,7 +22,7 @@ async function productGet(req, res) {
           name: productsList[i].name,
           price: productsList[i].price,
           description: productsList[i].description,
-          sold: productsList[i].sold,
+          status: productsList[i].status,
           images: [],
         };
       } else {
@@ -32,7 +33,7 @@ async function productGet(req, res) {
           name: productsList[i].name,
           price: productsList[i].price,
           description: productsList[i].description,
-          sold: productsList[i].sold,
+          status: productsList[i].status,
           images: [],
         };
       }
