@@ -29,6 +29,7 @@ app.delete("/api/v1/products/:id", controllers.authenticator, controllers.produc
 
 // bids
 app.get('/api/v1/products/:productId/bids', controllers.authenticator, controllers.GetProductBid,)
+app.post('/api/v1/products/:productId/bids', controllers.authenticator, controllers.CreateProductBid,)
 
 // https://www.npmjs.com/package/swagger-ui-express
 const options = {
