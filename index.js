@@ -25,6 +25,7 @@ app.post("/api/v1/productsimageupload", controllers.authenticator, controllers.i
 app.get("/api/v1/products", controllers.productGet);
 app.get("/api/v1/products/:id", controllers.productGetByID);
 app.put("/api/v1/products/:id", controllers.authenticator, controllers.productPut);
+app.put('/api/v1/products/:productId/status', controllers.authenticator, controllers.UpdateProductStatus)
 app.delete("/api/v1/products/:id", controllers.authenticator, controllers.productDelete);
 
 // bids
