@@ -11,6 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Products.hasMany(models.Bids, {
+        as: 'bids',
+        foreignKey: 'product_id' 
+      })
+
+      Products.belongsTo(models.Categories, {
+        as: 'category',
+        foreignKey: 'category_id' 
+      })
     }
   }
   Products.init({
@@ -19,7 +28,8 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     price: DataTypes.FLOAT,
     description: DataTypes.STRING,
-    sold: DataTypes.BOOLEAN
+    // sold: DataTypes.BOOLEAN,
+    status: DataTypes.ENUM('open_for_bid', 'waiting_for_bid', 'sold'),
   }, {
     sequelize,
     modelName: 'Products',
