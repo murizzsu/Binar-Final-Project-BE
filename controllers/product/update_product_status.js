@@ -8,16 +8,15 @@ const UpdateProductStatus = async (req, res) => {
         const { productId } = req.params
         const { status } = req.body 
 
-        const product = await Products.findOne({
-            where: {
-                id: productId
-            }
-        })
-
-        if (product){
-            const whiteListStatus = [OPEN_FOR_BID, WAITING_FOR_BID_PRODUCT, SOLD_PRODUCT]
-
-            if (whiteListStatus.includes(status)){
+        const whiteListStatus = [OPEN_FOR_BID, WAITING_FOR_BID_PRODUCT, SOLD_PRODUCT]
+        if (whiteListStatus.includes(status)){
+            const product = await Products.findOne({
+                where: {
+                    id: productId
+                }
+            })
+            
+            if (product){
                 if (product.status !== SOLD_PRODUCT){
                     const updatedProduct = await Products.update({
                         status
@@ -31,12 +30,10 @@ const UpdateProductStatus = async (req, res) => {
                     return Success200(res, updatedProduct)
                 }
                 return Error4xx(res, 400, "BadRequest")
-            } 
-            return Error4xx(res, 400, "BadRequest")
-
-        } 
-        return Error4xx(res, 404, "Product Not Found")
-
+            }
+            return Error4xx(res, 404, "Product Not Found")
+        }
+        return Error4xx(res, 400, "BadRequest")
     } catch(err){
         console.log(err)
         return Error500(res, err.message)
