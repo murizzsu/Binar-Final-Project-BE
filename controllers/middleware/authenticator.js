@@ -9,7 +9,7 @@ async function authenticator(req, res, next) {
         let payload = jwt.verify(header, "s3cr3t");
         let user = await Users.findByPk(payload.id);
         if (user) {
-            req.user = user
+            req.user = user;
             next();
             return;
         } else {

@@ -14,11 +14,11 @@ module.exports = (sequelize, DataTypes) => {
       Users.hasMany(models.Bids, {
         as: 'bids',
         foreignKey: 'user_id' 
-      })
+      });
       Users.belongsTo(models.Images, {
         as: 'image',
         foreignKey: 'image_id',
-      })
+      });
     }
   }
   Users.init({

@@ -25,15 +25,15 @@ app.post("/api/v1/productsimageupload", controllers.authenticator, controllers.i
 app.get("/api/v1/products", controllers.productGet);
 app.get("/api/v1/products/:id", controllers.productGetByID);
 app.put("/api/v1/products/:id", controllers.authenticator, controllers.productPut);
-app.put('/api/v1/products/:productId/status', controllers.authenticator, controllers.UpdateProductStatus)
+app.put('/api/v1/products/:productId/status', controllers.authenticator, controllers.UpdateProductStatus);
 app.delete("/api/v1/products/:id", controllers.authenticator, controllers.productDelete);
 
 // bids
-app.get('/api/v1/products/:productId/bids', controllers.authenticator, controllers.GetProductBid,)
-app.post('/api/v1/products/:productId/bids', controllers.authenticator, controllers.CreateProductBid,)
+app.get('/api/v1/products/:productId/bids', controllers.authenticator, controllers.GetProductBid,);
+app.post('/api/v1/products/:productId/bids', controllers.authenticator, controllers.CreateProductBid,);
 
 
-app.put('/api/v1/bids/:bidsId', controllers.authenticator, controllers.UpdateStatusBid)
+app.put('/api/v1/bids/:bidsId', controllers.authenticator, controllers.UpdateStatusBid);
 // https://www.npmjs.com/package/swagger-ui-express
 const options = {
     swaggerOptions: {

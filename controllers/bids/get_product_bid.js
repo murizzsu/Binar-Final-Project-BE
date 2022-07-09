@@ -1,7 +1,7 @@
-const { Error4xx, Error500 } = require('../../helpers/response/error')
-const { Success200 } = require('../../helpers/response/success')
-const sequelize = require('sequelize')
-const { Bids, Products, Categories, Users, Images } = require('../../models')
+const { Error4xx, Error500 } = require('../../helpers/response/error');
+const { Success200 } = require('../../helpers/response/success');
+const sequelize = require('sequelize');
+const { Bids, Products, Categories, Users, Images } = require('../../models');
 
 const NewResponseProductBids = (product) => {
     return {
@@ -27,9 +27,9 @@ const NewResponseProductBids = (product) => {
                 image: bid.user.image?.name,
             }
         }))
-    }
+    };
     
-}
+};
 
 /**
  * {
@@ -65,8 +65,8 @@ const NewResponseProductBids = (product) => {
 
 const GetProductBid = async (req, res) => {
     try{
-        const { productId } = req.params
-        const currentUser = req.user 
+        const { productId } = req.params;
+        const currentUser = req.user;
 
         const product = await Products.findOne({
             where: {
@@ -95,19 +95,19 @@ const GetProductBid = async (req, res) => {
                 WHEN "bids"."status" = 'pending'  THEN 2 
                 ELSE 3 END
             ) ASC`)
-        })
+        });
 
         if (product.user_id !== currentUser.id){
-            return Error4xx(res, 403, "You are not the owner of this product")
+            return Error4xx(res, 403, "You are not the owner of this product");
         }
 
 
-        return Success200(res, NewResponseProductBids(product))
+        return Success200(res, NewResponseProductBids(product));
 
     } catch(err){
-        console.log(err)
-        return Error500(res, err.message)
+        console.log(err);
+        return Error500(res, err.message);
     }
-}
+};
 
-module.exports = GetProductBid
+module.exports = GetProductBid;

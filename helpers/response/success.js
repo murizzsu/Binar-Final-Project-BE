@@ -1,7 +1,7 @@
 
 const Success200 = (res, content) => {
-    res.status(200).json(content)
-}
+    res.status(200).json(content);
+};
 
-module.exports = { Success200 }
+module.exports = { Success200 };
 

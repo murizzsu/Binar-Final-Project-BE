@@ -37,6 +37,6 @@ const replaceEnum = ({
                 SET DEFAULT '${defaultValue}'::${enumName}
           `, { transaction: t }));
       });
-}
+};
 
-module.exports = { replaceEnum }
+module.exports = { replaceEnum };

@@ -14,12 +14,12 @@ module.exports = (sequelize, DataTypes) => {
       Bids.belongsTo(models.Users, {
         as: 'user',
         foreignKey: 'user_id',
-      })
+      });
 
       Bids.belongsTo(models.Products, {
         as: 'product',
         foreignKey: 'product_id',
-      })
+      });
     }
   }
   Bids.init({

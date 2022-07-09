@@ -14,12 +14,12 @@ module.exports = (sequelize, DataTypes) => {
       Products.hasMany(models.Bids, {
         as: 'bids',
         foreignKey: 'product_id' 
-      })
+      });
 
       Products.belongsTo(models.Categories, {
         as: 'category',
         foreignKey: 'category_id' 
-      })
+      });
     }
   }
   Products.init({
