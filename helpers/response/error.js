@@ -30,7 +30,7 @@ const Error4xx = (res, statusCode, message) => {
 
 const Error500 = (res, message) => {
     res.status(500).json(newError500Payload(message));
-}
+};
 
 
 module.exports = {
