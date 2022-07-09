@@ -32,7 +32,7 @@ app.get('/api/v1/products/:productId/bids', controllers.authenticator, controlle
 app.post('/api/v1/products/:productId/bids', controllers.authenticator, controllers.CreateProductBid,)
 
 
-api.put('/api/v1/bids/:bidsId', controllers.authenticator, controllers.UpdateStatusBid)
+app.put('/api/v1/bids/:bidsId', controllers.authenticator, controllers.UpdateStatusBid)
 // https://www.npmjs.com/package/swagger-ui-express
 const options = {
     swaggerOptions: {
