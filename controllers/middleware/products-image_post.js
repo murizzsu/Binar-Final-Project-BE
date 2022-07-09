@@ -36,6 +36,7 @@ const NewResponseProductImages = (images) => {
 async function productsImagePost(req, res) {
     try {
         const { productId } = req.body
+        const { userId } = req.user;
 
         const images = req.files?.map(file => ({
             name: file.path,
@@ -53,17 +54,20 @@ async function productsImagePost(req, res) {
         })
         
         if (product){
-            const insertedImages = product.images
-            await removeManyFilesInCloudinary(PRODUCT_STORAGE, insertedImages)
-            
-            await Images.destroy({
-                where: {
-                    product_id: productId,
-                }
-            })
-
-            const imageCreated = await Images.bulkCreate(images)
-            return Success200(res, NewResponseProductImages(imageCreated))
+            if (product.user_id === userId){
+                const insertedImages = product.images
+                await removeManyFilesInCloudinary(PRODUCT_STORAGE, insertedImages)
+                
+                await Images.destroy({
+                    where: {
+                        product_id: productId,
+                    }
+                })
+    
+                const imageCreated = await Images.bulkCreate(images)
+                return Success200(res, NewResponseProductImages(imageCreated))
+            }
+            return Error4xx(res, 403, "You are not the owner of this product")
         }
         return Error4xx(res, 404, "Product not found")
 
