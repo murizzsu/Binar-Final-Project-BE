@@ -23,7 +23,7 @@ app.get("/api/v1/products/bid", controllers.authenticator, controllers.bidProduc
 
 // products
 app.post("/api/v1/products", controllers.authenticator, controllers.productPost);
-app.post("/api/v1/productsimageupload",  controllers.imageUpload.products, controllers.productsImagePost);
+app.post("/api/v1/productsimageupload", controllers.authenticator, controllers.imageUpload.products, controllers.productsImagePost);
 app.get("/api/v1/products", controllers.productGet);
 app.get("/api/v1/products/:id", controllers.productGetByID);
 app.put("/api/v1/products/:id", controllers.authenticator, controllers.productPut);
