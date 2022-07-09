@@ -40,7 +40,8 @@ const UpdateStatusBid = async (req, res) => {
                 case ACCEPTED_BIDS:
                     return Success200(res, "Successfully accepted bid")
             }
-        }
+        } 
+        return Error4xx(res, 400, "BadRequest")
     } catch(err){
         Error500(res, err.message)
     }
