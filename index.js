@@ -20,6 +20,7 @@ app.get("/api/v1/products/sale",controllers.authenticator, controllers.saleProdu
 app.get("/api/v1/products/bid", controllers.authenticator, controllers.bidProduct);
 
 // products
+app.get("/api/v1/categories", controllers.GetAllCategories);
 app.post("/api/v1/products", controllers.authenticator, controllers.productPost);
 app.post("/api/v1/productsimageupload", controllers.authenticator, controllers.imageUpload.products, controllers.productsImagePost);
 app.get("/api/v1/products", controllers.productGet);
