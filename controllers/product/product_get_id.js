@@ -3,51 +3,82 @@ const { OPEN_FOR_BID } = require('../../helpers/database/enums');
 const { Success200 } = require("../../helpers/response/success");
 const { Error4xx, Error500 } = require("../../helpers/response/error");
 
+const newGetProductByIDResponse = (product) => ({
+    id: product.id,
+    name: product.name,
+    price: product.price,
+    decsription: product.description,
+    status: product.status,
+    owner: {
+        id: product.user.id,
+        name: product.user.name,
+        city: product.user.city,
+        image_id: product.user.image_id,
+    },
+    category: {
+        id: product.category.id,
+        name: product.category.name
+    }
+})
+
+// {
+//     "id": 7,
+//     "user_id": 3,
+//     "category_id": 2,
+//     "name": "c",
+//     "price": 151,
+//     "description": "asda",
+//     "status": "open_for_bid",
+//     "createdAt": "2022-07-10T08:06:46.226Z",
+//     "updatedAt": "2022-07-10T08:06:46.226Z",
+//     "user": {
+//         "id": 3,
+//         "email": "kelvin@gmail.com",
+//         "password": "$2b$10$UTG0tRDi8u76RoUocQ07VuaoF38ml3sz2DNcBqbchWmOZJoj9QWI2",
+//         "image_id": null,
+//         "name": "kelvin",
+//         "city": null,
+//         "address": null,
+//         "phone": null,
+//         "createdAt": "2022-07-10T07:57:30.235Z",
+//         "updatedAt": "2022-07-10T07:57:30.235Z"
+//     },
+//     "category": {
+//         "id": 2,
+//         "name": "Kendaraan",
+//         "createdAt": "2022-07-10T07:55:37.940Z",
+//         "updatedAt": "2022-07-10T07:55:37.940Z"
+//     }
+// }
 async function productGetByID(req, res) {
     try {
-        const idInput = req.params.id;
-        const product = await Products.findByPk(idInput, {
-            where: { status: OPEN_FOR_BID },
-        });
+        const { id } = req.params;
 
-        if (product) {
-            const userProduct = await Users.findByPk(product.user_id);
-            const categoryProduct = await Categories.findByPk(product.category_id);
+        let queryProduct = {
+            id,
+        }
 
-            let data = {};
+        let queryUser = {}
 
-            if (categoryProduct) {
-                data = {
-                    id: product.id,
-                    user_name: userProduct.name,
-                    category: categoryProduct.name,
-                    name: product.name,
-                    price: product.price,
-                    description: product.description,
-                    status: product.status,
-                    images: [],
-                };
-            } else {
-                data = {
-                    id: product.id,
-                    user_name: userProduct.name,
-                    category: "Kategori tidak ada",
-                    name: product.name,
-                    price: product.price,
-                    description: product.description,
-                    status: product.status,
-                    images: [],
-                };
-            }
+        let queryCategory = {}
 
-            const imagesList = await Images.findAll({
-                where: { product_id: data.id },
-            });
-
-            for (let j in imagesList) {
-                data.images.push(imagesList[j].name);
-            }
-            return Success200(res, data)
+        const product = await Products.findOne({
+            where: queryProduct,
+            include: [
+                {
+                    model: Users,
+                    as: 'user',
+                    where: queryUser,
+                }, {
+                    model: Categories,
+                    as: 'category',
+                    where: queryCategory
+                }
+            ]
+        })
+        console.log(product)
+        if (product){
+            return Success200(res, newGetProductByIDResponse(product))
         }
         return Error4xx(res, 404, "Product Not Found")
     } catch (err) {
