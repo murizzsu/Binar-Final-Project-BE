@@ -10,26 +10,14 @@ async function profil(req, res) {
     let check = await Users.findByPk(user.id);
 
     if (check) {
-      let cityInput = req.body.city;
-      let addressInput = req.body.address;
-      let phoneInput = req.body.phone;
-      // let imageInput = req.body.image;
-
-      // let ImageUpload = await Images.create({
-      //   name: imageInput,
-      // });
-
-      
-      // if (check.image_url) {
-      //   await Images.destroy({ where: { id: check.image_url } });
-      // }
+      const { name, city, address, phone } = req.body
 
       await Users.update(
         {
-          city: cityInput,
-          address: addressInput,
-          phone: phoneInput,
-          // image_url: ImageUpload.url,
+          name,
+          city,
+          address,
+          phone,
         },
         {
           where: { id: user.id },
