@@ -7,7 +7,7 @@ const newGetProductByIDResponse = (product) => ({
     id: product.id,
     name: product.name,
     price: product.price,
-    decsription: product.description,
+    description: product.description,
     status: product.status,
     owner: {
         id: product.user.id,
