@@ -1,14 +1,14 @@
 const { Error4xx, Error500 } = require('../../helpers/response/error');
 const { Success200 } = require('../../helpers/response/success');
 const { Bids, Products } = require('../../models');
-const { OPEN_FOR_BID_PRODUCT } = require('../../helpers/database/enums');
+const { PENDING_BIDS } = require('../../helpers/database/enums');
 
 const CreateProductBid = async (req, res) => {
     try{
         const { productId } = req.params;
-        const { userId } = req.user;
-        const { requestPrice } = req.body;
-    
+        const { id: userId } = req.user;
+        const { request_price } = req.body;
+        
         const product = await Products.findOne({
             where: {
                 id: productId
@@ -20,14 +20,15 @@ const CreateProductBid = async (req, res) => {
         }
     
         const newProductBid = await Bids.create({
-            productId,
-            userId,
-            requestPrice,
-            status: OPEN_FOR_BID_PRODUCT
+            product_id: productId,
+            user_id: userId,
+            request_price: request_price,
+            status: PENDING_BIDS
         });
     
         return Success200(res, newProductBid);
     } catch(err){
+        console.log(err)
         Error500(res, err.message);
     }
 };
