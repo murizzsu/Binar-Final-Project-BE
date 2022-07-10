@@ -18,11 +18,11 @@ async function productPost(req, res) {
 
         const Product = await Products.create(productInput);
 
-        return Success200(res, Product)
+        return Success200(res, Product);
 
 
     } catch (err) {
-        return Error500(res, err.message)
+        return Error500(res, err.message);
     }
 }
 

@@ -13,13 +13,13 @@ const newGetProductByIDResponse = (product) => ({
         id: product.user.id,
         name: product.user.name,
         city: product.user.city,
-        image_id: product.user.image_id,
+        image_url: product.user.image_url,
     },
     category: {
         id: product.category.id,
         name: product.category.name
     }
-})
+});
 
 // {
 //     "id": 7,
@@ -56,11 +56,11 @@ async function productGetByID(req, res) {
 
         let queryProduct = {
             id,
-        }
+        };
 
-        let queryUser = {}
+        let queryUser = {};
 
-        let queryCategory = {}
+        let queryCategory = {};
 
         const product = await Products.findOne({
             where: queryProduct,
@@ -75,14 +75,14 @@ async function productGetByID(req, res) {
                     where: queryCategory
                 }
             ]
-        })
-        console.log(product)
+        });
+        console.log(product);
         if (product){
-            return Success200(res, newGetProductByIDResponse(product))
+            return Success200(res, newGetProductByIDResponse(product));
         }
-        return Error4xx(res, 404, "Product Not Found")
+        return Error4xx(res, 404, "Product Not Found");
     } catch (err) {
-        return Error500(res, err.message)
+        return Error500(res, err.message);
     }
 }
 

@@ -17,7 +17,7 @@ async function authenticator(req, res, next) {
             return Error4xx(res, 400, "BadRequest");
         }
     } catch (err) {
-        return Error500(res, err.message)
+        return Error500(res, err.message);
     }
 
 }

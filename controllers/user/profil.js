@@ -1,4 +1,4 @@
-const { Users, Images } = require("../../models");
+const { Users } = require("../../models");
 const jwt = require("jsonwebtoken");
 const { Success200 } = require("../../helpers/response/success");
 const { Error500 } = require("../../helpers/response/error");
@@ -13,31 +13,32 @@ async function profil(req, res) {
       let cityInput = req.body.city;
       let addressInput = req.body.address;
       let phoneInput = req.body.phone;
-      let imageInput = req.body.image;
+      // let imageInput = req.body.image;
 
-      let ImageUpload = await Images.create({
-        name: imageInput,
-      });
+      // let ImageUpload = await Images.create({
+      //   name: imageInput,
+      // });
 
-      if (check.image_id) {
-        await Images.destroy({ where: { id: check.image_id } });
-      }
+      
+      // if (check.image_url) {
+      //   await Images.destroy({ where: { id: check.image_url } });
+      // }
 
       await Users.update(
         {
           city: cityInput,
           address: addressInput,
           phone: phoneInput,
-          image_id: ImageUpload.id,
+          // image_url: ImageUpload.url,
         },
         {
           where: { id: user.id },
         }
       );
-      return Success200(res, "Successfully updating profile")
+      return Success200(res, "Successfully updating profile");
     }
   } catch (err) {
-    return Error500(res, err.message)
+    return Error500(res, err.message);
   }
 }
 

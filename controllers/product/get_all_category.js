@@ -1,13 +1,13 @@
-const { Error500 } = require('../../helpers/response/error')
-const { Success200 } = require('../../helpers/response/success')
-const { Categories } = require('../../models')
+const { Error500 } = require('../../helpers/response/error');
+const { Success200 } = require('../../helpers/response/success');
+const { Categories } = require('../../models');
 
 const newResponseCategories = (categories) => {
     return categories.map(category => ({
         id: category.id,
         name: category.name,
-    }))
-}
+    }));
+};
 
 
 /**
@@ -36,15 +36,15 @@ const newResponseCategories = (categories) => {
  */
 const GetAllCategories = async (req, res) => {
     try{
-        const categories = await Categories.findAll()
+        const categories = await Categories.findAll();
 
-        return Success200(res, newResponseCategories(categories))
+        return Success200(res, newResponseCategories(categories));
     } catch(err){
-        return Error500(res, err.message)
+        return Error500(res, err.message);
     }
     
 
     
-}
+};
 
-module.exports = GetAllCategories
+module.exports = GetAllCategories;

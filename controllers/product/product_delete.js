@@ -13,15 +13,15 @@ async function productDelete(req, res) {
         if (check) {
             if (check.user_id == user.id) {
                 await Products.destroy({ where: { id: idInput}});
-                return Success200(res, "Successfully deleted")
+                return Success200(res, "Successfully deleted");
             } else {
-                return Error4xx(res, 403, "You are not the owner of this product")
+                return Error4xx(res, 403, "You are not the owner of this product");
             }
         } else {
-            return Error4xx(res, 404, "Product not found")
+            return Error4xx(res, 404, "Product not found");
         }
     } catch (err) {
-        return Error500(res, err.message)
+        return Error500(res, err.message);
     }
 }
 

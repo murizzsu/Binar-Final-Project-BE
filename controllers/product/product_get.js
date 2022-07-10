@@ -47,9 +47,9 @@ async function productGet(req, res) {
       }
       products.push(data);
     } 
-    return Success200(res, products)
+    return Success200(res, products);
   } catch (err) {
-    return Error500(res, err)
+    return Error500(res, err);
   }
 }
 

@@ -13,9 +13,9 @@ async function saleProduct(req, res) {
           where: { user_id: user.id, status: OPEN_FOR_BID_PRODUCT },
         });
     
-        return Success200(res, productsList)
+        return Success200(res, productsList);
       } catch (err) {
-        return Error500(res, err.message)
+        return Error500(res, err.message);
         
       }
 }

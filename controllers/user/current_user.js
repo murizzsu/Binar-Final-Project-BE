@@ -31,12 +31,12 @@ async function currentUser(req, res) {
         city: user2.city,
         address: user2.address,
         phone: user2.phone,
-        image_id: user2.image_id
-      })
+        image_url: user2.file.path
+      });
     } 
-    return Error4xx(res, 401, "You are unauthorized")
+    return Error4xx(res, 401, "You are unauthorized");
   } catch (err) {
-    return Error500(res, err.message)
+    return Error500(res, err.message);
   }
 }
 

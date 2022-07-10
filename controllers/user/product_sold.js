@@ -12,9 +12,9 @@ async function soldProduct(req, res) {
         const productsList = await Products.findAll({
           where: { user_id: user.id, status: SOLD_PRODUCT },
         });
-        return Success200(res, productsList)
+        return Success200(res, productsList);
       } catch (err) {
-        return Error500(res, err.message)
+        return Error500(res, err.message);
       }
     }
 
