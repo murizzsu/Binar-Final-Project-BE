@@ -3,10 +3,12 @@ const cors = require("cors");
 const app = express();
 const controllers = require("./controllers");
 const swaggerUI = require("swagger-ui-express");
+const { Products, Images } = require('./models')
 
 const {  PORT = 8000 } = process.env;
 
 app.use(cors());
+app.use(express.urlencoded({extended: true}))
 app.use(express.json());
 
 // users
@@ -51,4 +53,5 @@ app.get("/api-docs", (req, res) => {
     res.sendFile(__dirname + "/swagger.yaml");
 });
 
+// cloudinary.uploader.destroy(['binar-final-project/products/glucqezh4kj0std6htlj', 'binar-final-project/products/dubsuqiopbagsfwo5qeu'], (err, res) => console.log(res))
 app.listen(PORT, () => console.log(`Server is listening on PORT ${PORT}`));
