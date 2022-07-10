@@ -1,5 +1,8 @@
 const { Products } = require("../../models");
 const jwt = require("jsonwebtoken");
+const { SOLD_PRODUCT } = require("../../helpers/database/enums");
+const { Success200 } = require("../../helpers/response/success");
+const { Error500 } = require("../../helpers/response/error");
 
 async function soldProduct(req, res) {
     try {
@@ -7,18 +10,11 @@ async function soldProduct(req, res) {
         let user = jwt.verify(header, "s3cr3t");
     
         const productsList = await Products.findAll({
-          where: { user_id: user.id, sold: true },
+          where: { user_id: user.id, status: SOLD_PRODUCT },
         });
-    
-        if (productsList.length > 0) {
-          res.status(200).send(productsList);
-        } else {
-          res.json({ message: "Belum ada barang yang terjual" });
-        }
+        return Success200(res, productsList)
       } catch (err) {
-        res.json({
-          message: err,
-        });
+        return Error500(res, err.message)
       }
     }
 

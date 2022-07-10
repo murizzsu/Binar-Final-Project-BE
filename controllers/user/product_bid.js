@@ -3,6 +3,8 @@ const { Bids } = require("../../models");
 const { Users } = require("../../models");
 
 const jwt = require("jsonwebtoken");
+const { Success200 } = require("../../helpers/response/success");
+const { Error500 } = require("../../helpers/response/error");
 
 async function bidProduct(req, res) {
   try {
@@ -32,13 +34,9 @@ async function bidProduct(req, res) {
       }
     }
 
-    if (listInterestedProducts.length > 0) {
-      res.send(listInterestedProducts);
-    } else {
-      res.send("Saat ini produkmu belum ada yang minat nih");
-    }
+    return Success200(res, listInterestedProducts)
   } catch (err) {
-    res.send(err);
+    return Error500(res, err.message)
   }
 }
 

@@ -1,5 +1,8 @@
 const { Products } = require("../../models");
 const jwt = require("jsonwebtoken");
+const { Error500 } = require("../../helpers/response/error");
+const { Success200 } = require("../../helpers/response/success");
+const { OPEN_FOR_BID_PRODUCT } = require("../../helpers/database/enums");
 
 async function saleProduct(req, res) {
     try {
@@ -7,22 +10,13 @@ async function saleProduct(req, res) {
         let user = jwt.verify(header, "s3cr3t");
     
         let productsList = await Products.findAll({
-          where: { user_id: user.id, sold: false },
+          where: { user_id: user.id, status: OPEN_FOR_BID_PRODUCT },
         });
     
-        if (productsList) {
-          if (!productsList.length == 0) {
-            res.status(200).send(productsList);
-          } else {
-            res.send("Belum ada barang yang dijual");
-          }
-        } else {
-          res.send("Barang tidak ditemukan");
-        }
+        return Success200(res, productsList)
       } catch (err) {
-        res.send({
-          message: err,
-        });
+        return Error500(res, err.message)
+        
       }
 }
 

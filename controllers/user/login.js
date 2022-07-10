@@ -1,4 +1,6 @@
 const jwt = require("jsonwebtoken");
+const { Error4xx, Error500 } = require("../../helpers/response/error");
+const { Success200 } = require("../../helpers/response/success");
 const { Users } = require("../../models");
 const decryptFunction = require("../encrypt-decrypt/decrypt_pass");
 
@@ -27,19 +29,16 @@ async function login(req, res) {
           phone: validation.phone
         };
         let token = jwt.sign(user, "s3cr3t");
-        res.status(200).json({
-          user: user,
-          token: token,
-        });
-        return;
-      } else {
-        res.send("email atau password tidak sesuai");
-      }
-    } else {
-      res.send("email atau password tidak sesuai");
+        return Success200(res, {
+          user,
+          token
+        })
+      } 
+      return Error4xx(res, 401, "Email or Password doesn't match")
     }
+    return Error4xx(res, 401, "Email or Password doesn't match")
   } catch (err) {
-    res.send(err);
+    return Error500(res, err.message)
   }
 
 }

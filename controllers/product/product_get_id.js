@@ -1,5 +1,7 @@
 const { Products, Users, Categories, Images } = require("../../models");
 const { OPEN_FOR_BID } = require('../../helpers/database/enums');
+const { Success200 } = require("../../helpers/response/success");
+const { Error4xx, Error500 } = require("../../helpers/response/error");
 
 async function productGetByID(req, res) {
     try {
@@ -45,12 +47,11 @@ async function productGetByID(req, res) {
             for (let j in imagesList) {
                 data.images.push(imagesList[j].name);
             }
-            res.send(data);
-        } else {
-            res.json({ message: "Barang tidak ditemukan" });
+            return Success200(res, data)
         }
+        return Error4xx(res, 404, "Product Not Found")
     } catch (err) {
-        res.send(err);
+        return Error500(res, err.message)
     }
 }
 
