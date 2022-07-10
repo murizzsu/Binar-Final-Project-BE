@@ -15,7 +15,7 @@ async function register(req, res) {
       password: passwordInput,
     });
 
-    return Success200({
+    return Success200(res, {
       id: user.id,
       name: user.name,
       email: user.email,

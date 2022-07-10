@@ -16,17 +16,9 @@ async function productPost(req, res) {
             description: req.body.description,
         };
 
-        const imageInput = req.body.image;
-
         const Product = await Products.create(productInput);
 
-        for (let i in imageInput) {
-            await Images.create({
-                name: imageInput[i],
-                product_id: Product.id
-            });
-        } 
-        return Success200(productInput)
+        return Success200(res, Product)
 
 
     } catch (err) {
