@@ -22,9 +22,9 @@ async function register(req, res) {
       created_at: user.createdAt,
       updated_at: user.updatedAt,
       message: `Email kamu berhasil terdaftar`
-    })
+    });
   } catch (err) {
-    return Error500(res, err.message)
+    return Error500(res, err.message);
   }
 
 }

@@ -25,7 +25,7 @@ module.exports = {
     productsImagePost: require("./middleware/products-image_post"),
     
     // User
-    profil: require("./user/profil"),
+    // profil: require("./user/profil"),
     saleProduct: require("./user/product_sale"),
     soldProduct: require("./user/product_sold"),
     bidProduct : require("./user/product_bid"),

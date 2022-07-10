@@ -29,7 +29,7 @@ const CreateProductBid = async (req, res) => {
     
         return Success200(res, newProductBid);
     } catch(err){
-        console.log(err)
+        console.log(err);
         Error500(res, err.message);
     }
 };

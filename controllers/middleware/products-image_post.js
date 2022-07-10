@@ -1,6 +1,6 @@
 const { PRODUCT_STORAGE } = require('../../config/cloudinaryStorage');
-const { Error4xx, Error500 } = require('../../helpers/response/error')
-const { Images, Products } = require('../../models')
+const { Error4xx, Error500 } = require('../../helpers/response/error');
+const { Images, Products } = require('../../models');
 const { removeManyFilesInCloudinary } = require('../../helpers/cloudinary/destroy');
 const { Success200 } = require('../../helpers/response/success');
 
@@ -8,10 +8,10 @@ const NewResponseProductImages = (images) => {
     images = images.map(image => ({
         name: image.name,
         product_id: image.product_id,
-    }))
+    }));
 
-    return images
-}
+    return images;
+};
 
 /**
  *  [
@@ -35,13 +35,13 @@ const NewResponseProductImages = (images) => {
  */
 async function productsImagePost(req, res) {
     try {
-        const { productId } = req.body
+        const { productId } = req.body;
         const { id: userId } = req.user;
 
         const images = req.files?.map(file => ({
             name: file.path,
             product_id: Number(productId)
-        }))
+        }));
 
         const product = await Products.findOne({
             where: {
@@ -51,30 +51,30 @@ async function productsImagePost(req, res) {
                 model: Images,
                 as: 'images'
             }
-        })
+        });
         if (product){
             if (product.user_id === userId){
-                const insertedImages = product.images
-                await removeManyFilesInCloudinary(PRODUCT_STORAGE, insertedImages)
+                const insertedImages = product.images;
+                await removeManyFilesInCloudinary(PRODUCT_STORAGE, insertedImages);
                 
                 if (insertedImages.length > 0){
                     await Images.destroy({
                         where: {
                             product_id: productId,
                         }
-                    })
+                    });
                 }
     
-                const imageCreated = await Images.bulkCreate(images)
-                return Success200(res, NewResponseProductImages(imageCreated))
+                const imageCreated = await Images.bulkCreate(images);
+                return Success200(res, NewResponseProductImages(imageCreated));
             }
-            return Error4xx(res, 403, "You are not the owner of this product")
+            return Error4xx(res, 403, "You are not the owner of this product");
         }
-        return Error4xx(res, 404, "Product not found")
+        return Error4xx(res, 404, "Product not found");
 
         
     } catch (err) {
-        return Error500(res, err.message)
+        return Error500(res, err.message);
     }
 }
 

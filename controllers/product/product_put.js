@@ -24,13 +24,13 @@ async function productPut(req, res) {
           where: { id: idInput },
         });
 
-		return Success200(res, "Successfully updated product")
-      } 
-	  return Error4xx(res, 404, "Product not found")
+        return Success200(res, "Successfully updated product");
+      }
+      return Error4xx(res, 404, "Product not found");
     }
-	return Error4xx(res, 403, "You are not the owner of this product") 
+    return Error4xx(res, 403, "You are not the owner of this product");
   } catch (err) {
-	return Error500(res, err.message)
+    return Error500(res, err.message);
   }
 }
 module.exports = productPut;

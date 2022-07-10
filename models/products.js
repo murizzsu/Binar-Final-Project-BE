@@ -24,12 +24,12 @@ module.exports = (sequelize, DataTypes) => {
       Products.hasMany(models.Images, {
         as: "images",
         foreignKey: "product_id"
-      })
+      });
 
       Products.belongsTo(models.Users, {
         as: "user",
         foreignKey: "user_id",
-      })
+      });
     }
   }
   Products.init({

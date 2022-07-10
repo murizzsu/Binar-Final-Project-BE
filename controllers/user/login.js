@@ -32,13 +32,13 @@ async function login(req, res) {
         return Success200(res, {
           user,
           token
-        })
+        });
       } 
-      return Error4xx(res, 401, "Email or Password doesn't match")
+      return Error4xx(res, 401, "Email or Password doesn't match");
     }
-    return Error4xx(res, 401, "Email or Password doesn't match")
+    return Error4xx(res, 401, "Email or Password doesn't match");
   } catch (err) {
-    return Error500(res, err.message)
+    return Error500(res, err.message);
   }
 
 }

@@ -34,9 +34,9 @@ async function bidProduct(req, res) {
       }
     }
 
-    return Success200(res, listInterestedProducts)
+    return Success200(res, listInterestedProducts);
   } catch (err) {
-    return Error500(res, err.message)
+    return Error500(res, err.message);
   }
 }
 
