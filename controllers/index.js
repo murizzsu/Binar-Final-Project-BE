@@ -6,6 +6,7 @@ module.exports = {
     register: require("./user/register"),
 
     // Product
+    GetAllCategories: require('./product/get_all_category'),
     productPost: require("./product/product_post"),
     productGet: require("./product/product_get"),
     productGetByID: require("./product/product_get_id"),
