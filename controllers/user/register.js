@@ -1,3 +1,5 @@
+const { Error500 } = require("../../helpers/response/error");
+const { Success200 } = require("../../helpers/response/success");
 const { Users } = require("../../models");
 const encryptFunction = require("../encrypt-decrypt/encrypt_pass");
 
@@ -12,16 +14,17 @@ async function register(req, res) {
       email: emailInput,
       password: passwordInput,
     });
-    res.status(201).json({
+
+    return Success200({
       id: user.id,
       name: user.name,
       email: user.email,
       created_at: user.createdAt,
       updated_at: user.updatedAt,
       message: `Email kamu berhasil terdaftar`
-    });
+    })
   } catch (err) {
-    res.send(err);
+    return Error500(res, err.message)
   }
 
 }

@@ -1,5 +1,7 @@
 const { Users } = require("../../models");
 const jwt = require("jsonwebtoken");
+const { Success200 } = require("../../helpers/response/success");
+const { Error4xx, Error500 } = require("../../helpers/response/error");
 
 async function currentUser(req, res) {
   try {
@@ -24,18 +26,17 @@ async function currentUser(req, res) {
     });
 
     if (user2) {
-      res.status(200).json({
+      return Success200(res, {
         name: user2.name,
         city: user2.city,
         address: user2.address,
         phone: user2.phone,
         image_id: user2.image_id
-      });
-    } else {
-      res.send("Anda harus login dulu");
-    }
+      })
+    } 
+    return Error4xx(res, 401, "You are unauthorized")
   } catch (err) {
-    res.send(err);
+    return Error500(res, err.message)
   }
 }
 

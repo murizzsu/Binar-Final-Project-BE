@@ -38,7 +38,7 @@ const NewResponseProductBids = (product) => {
  *      name: "sepatu",
  *      price: "123000",
  *      description: "sepatu murah",
- *      sold: false,
+ *      status: "open_for_bid",
  *      category: {
  *          categoryId: 1,
  *          categoryName: "aksesoris"

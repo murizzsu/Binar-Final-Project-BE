@@ -1,5 +1,7 @@
 const { Products } = require("../../models");
 const jwt = require("jsonwebtoken");
+const { Success200 } = require("../../helpers/response/success");
+const { Error4xx, Error500 } = require("../../helpers/response/error");
 
 async function productPut(req, res) {
   try {
@@ -22,21 +24,13 @@ async function productPut(req, res) {
           where: { id: idInput },
         });
 
-        if (productUpdate) {
-          res.json({ message: `Barang dengan ${data.name} berhasil diperbarui` });
-        } else {
-          res.json({ message: `Barang dengan ${data.name} tidak berhasil diperbarui` });
-        }
-      } else {
-        res.json({ message: "Barang tidak ditemukan" });
-      }
-    } else {
-      res.json({
-        message: "Barang tidak dapat diperbarui karena Anda bukan pemiliknya",
-      });
+		return Success200(res, "Successfully updated product")
+      } 
+	  return Error4xx(res, 404, "Product not found")
     }
+	return Error4xx(res, 403, "You are not the owner of this product") 
   } catch (err) {
-    res.send(err);
+	return Error500(res, err.message)
   }
 }
 module.exports = productPut;

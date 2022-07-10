@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const { Error4xx, Error500 } = require("../../helpers/response/error");
 const { Users } = require("../../models");
 
 
@@ -13,16 +14,10 @@ async function authenticator(req, res, next) {
             next();
             return;
         } else {
-            res.status(403).json({
-                message: "Forbidden"
-            });
-            return;
+            return Error4xx(res, 400, "BadRequest");
         }
     } catch (err) {
-        res.status(403).json({
-            message: "Forbidden"
-        });
-        return;
+        return Error500(res, err.message)
     }
 
 }

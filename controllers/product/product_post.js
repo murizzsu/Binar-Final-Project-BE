@@ -1,5 +1,7 @@
 const { Products, Images } = require("../../models");
 const jwt = require("jsonwebtoken");
+const { Success200 } = require("../../helpers/response/success");
+const { Error500 } = require("../../helpers/response/error");
 
 async function productPost(req, res) {
     try {
@@ -18,28 +20,17 @@ async function productPost(req, res) {
 
         const Product = await Products.create(productInput);
 
-        if (Product) {
-            for (let i in imageInput) {
-                await Images.create({
-                    name: imageInput[i],
-                    product_id: Product.id
-                });
-            } 
-            
-            res.status(201).json({
-                name: req.body.name,
-                message: `Barang dengan ${productInput.name} berhasil dibuat`
-                
-             });
-        } else {
-            res.json({ 
-                message: `Barang dengan ${productInput.name} tidak berhasil dibuat`
+        for (let i in imageInput) {
+            await Images.create({
+                name: imageInput[i],
+                product_id: Product.id
             });
-        }
+        } 
+        return Success200(productInput)
 
 
     } catch (err) {
-        res.send(err);
+        return Error500(res, err.message)
     }
 }
 

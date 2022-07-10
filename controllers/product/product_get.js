@@ -1,5 +1,7 @@
 const { Products, Users, Categories, Images } = require("../../models");
 const { OPEN_FOR_BID } = require('../../helpers/database/enums');
+const { Success200 } = require("../../helpers/response/success");
+const { Error500 } = require("../../helpers/response/error");
 
 async function productGet(req, res) {
   try {
@@ -45,9 +47,9 @@ async function productGet(req, res) {
       }
       products.push(data);
     } 
-    res.send(products);
+    return Success200(res, products)
   } catch (err) {
-    res.send(err);
+    return Error500(res, err)
   }
 }
 
