@@ -3,12 +3,13 @@ const { Success200 } = require('../../helpers/response/success');
 const { Bids, Products } = require('../../models');
 const { PENDING_BIDS } = require('../../helpers/database/enums');
 
+// TODO check if the bid larger than the original price
 const CreateProductBid = async (req, res) => {
     try{
         const { productId } = req.params;
         const { id: userId } = req.user;
         const { request_price } = req.body;
-        
+
         const product = await Products.findOne({
             where: {
                 id: productId
