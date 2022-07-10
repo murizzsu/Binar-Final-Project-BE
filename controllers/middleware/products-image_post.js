@@ -36,7 +36,7 @@ const NewResponseProductImages = (images) => {
 async function productsImagePost(req, res) {
     try {
         const { productId } = req.body
-        const { userId } = req.user;
+        const { id: userId } = req.user;
 
         const images = req.files?.map(file => ({
             name: file.path,
@@ -52,17 +52,18 @@ async function productsImagePost(req, res) {
                 as: 'images'
             }
         })
-        
         if (product){
             if (product.user_id === userId){
                 const insertedImages = product.images
                 await removeManyFilesInCloudinary(PRODUCT_STORAGE, insertedImages)
                 
-                await Images.destroy({
-                    where: {
-                        product_id: productId,
-                    }
-                })
+                if (insertedImages.length > 0){
+                    await Images.destroy({
+                        where: {
+                            product_id: productId,
+                        }
+                    })
+                }
     
                 const imageCreated = await Images.bulkCreate(images)
                 return Success200(res, NewResponseProductImages(imageCreated))
