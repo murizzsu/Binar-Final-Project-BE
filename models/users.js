@@ -15,10 +15,6 @@ module.exports = (sequelize, DataTypes) => {
         as: 'bids',
         foreignKey: 'user_id' 
       });
-      Users.belongsTo(models.Images, {
-        as: 'image',
-        foreignKey: 'image_id',
-      });
 
       Users.hasMany(models.Products, {
         as: "products",
@@ -29,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
   Users.init({
     email: DataTypes.STRING,
     password: DataTypes.STRING,
-    image_id: DataTypes.INTEGER,
+    image_url: DataTypes.STRING,
     name: DataTypes.STRING,
     city: DataTypes.STRING,
     address: DataTypes.STRING,
