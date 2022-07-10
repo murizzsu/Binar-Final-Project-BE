@@ -27,6 +27,7 @@ async function currentUser(req, res) {
 
     if (user2) {
       return Success200(res, {
+        id: user2.id,
         name: user2.name,
         city: user2.city,
         address: user2.address,
