@@ -66,7 +66,6 @@ async function productGet(req, res) {
           as: "category",
           where: queryCategories
         }
-<<<<<<< controllers/product/product_get.js
       ],
       order: [['id', 'DESC']]
     })
@@ -116,14 +115,6 @@ async function productGet(req, res) {
   } catch (err) {
     console.log(err)
     return Error500(res, err)
-=======
-      }
-      products.push(data);
-    } 
-    return Success200(res, products);
-  } catch (err) {
-    return Error500(res, err);
->>>>>>> controllers/product/product_get.js
   }
 }
 
