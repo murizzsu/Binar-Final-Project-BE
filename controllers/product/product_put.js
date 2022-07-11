@@ -7,11 +7,17 @@ async function productPut(req, res) {
   try {
     let header = req.headers.authorization.split("Bearer ")[1];
     let user = jwt.verify(header, "s3cr3t");
-    const idInput = req.params.id;
-    const product = await Products.findByPk(idInput);
 
-    if (product.user_id == user.id) {
-      if (product) {
+    let { id: userId } = req.user
+    const { id: idInput } = req.params
+    const product = await Products.findOne({
+      where: {
+        id: idInput
+      }
+    });
+
+    if (product) {
+      if (product.user_id == userId) {
         let data = {
           category_id: product.category_id,
           name: product.name,
@@ -26,9 +32,9 @@ async function productPut(req, res) {
 
         return Success200(res, "Successfully updated product");
       }
-      return Error4xx(res, 404, "Product not found");
+      return Error4xx(res, 403, "You are not the owner of this product");
     }
-    return Error4xx(res, 403, "You are not the owner of this product");
+    return Error4xx(res, 404, "Product not found");
   } catch (err) {
     return Error500(res, err.message);
   }

@@ -5,19 +5,18 @@ const { Success200 } = require("../../helpers/response/success");
 const { OPEN_FOR_BID_PRODUCT } = require("../../helpers/database/enums");
 
 async function saleProduct(req, res) {
-    try {
-        let header = req.headers.authorization.split("Bearer ")[1];
-        let user = jwt.verify(header, "s3cr3t");
+    // try {
+    //     const { id: userId } = req.user
     
-        let productsList = await Products.findAll({
-          where: { user_id: user.id, status: OPEN_FOR_BID_PRODUCT },
-        });
+    //     let productsList = await Products.findAll({
+    //       where: { user_id: userId, status: OPEN_FOR_BID_PRODUCT },
+    //     });
     
-        return Success200(res, productsList);
-      } catch (err) {
-        return Error500(res, err.message);
+    //     return Success200(res, productsList);
+    //   } catch (err) {
+    //     return Error500(res, err.message);
         
-      }
+    //   }
 }
 
 module.exports = saleProduct;

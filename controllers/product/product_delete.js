@@ -5,14 +5,18 @@ const { Error4xx, Error500 } = require("../../helpers/response/error");
 
 async function productDelete(req, res) {
     try {
-        let header = req.headers.authorization.split("Bearer ")[1];
-        let user = jwt.verify(header, "s3cr3t");
-        const idInput = req.params.id;
-        const check = await Products.findByPk(idInput);
-        console.log(check);
-        if (check) {
-            if (check.user_id == user.id) {
-                await Products.destroy({ where: { id: idInput}});
+        const { id: userId } = req.user
+        const { id: productId } = req.params.id
+        const product = await Products.findOne({
+            where: {
+                id: idInput
+            }    
+        });
+
+
+        if (product) {
+            if (product.user_id == userId) {
+                await Products.destroy({ where: { id: productId } });
                 return Success200(res, "Successfully deleted");
             } else {
                 return Error4xx(res, 403, "You are not the owner of this product");

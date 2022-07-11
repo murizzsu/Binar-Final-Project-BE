@@ -6,37 +6,33 @@ const decryptFunction = require("../encrypt-decrypt/decrypt_pass");
 
 async function login(req, res) {
   try {
-    let check = await Users.findOne({
+    let user = await Users.findOne({
       where: { email: req.body.email },
     });
     
-    if (check) {
-      let idGenerator = check.id;
-      let validation = await Users.findOne({
-        where: { id: idGenerator },
-      });
-      let checkPassword = await decryptFunction(
-        validation.password,
+    if (user) {
+      let isPasswordCorrect = await decryptFunction(
+        user.password,
         req.body.password
       );
-      if (req.body.email === validation.email && checkPassword) {
-        let user = {
-          id: validation.id, 
-          email: validation.email,
-          name: validation.name,
-          city: validation.city,
-          address: validation.address,
-          phone: validation.phone
+      if (isPasswordCorrect) {
+        let payload = {
+          id: user.id, 
+          email: user.email,
+          name: user.name,
+          city: user.city,
+          address: user.address,
+          phone: user.phone
         };
-        let token = jwt.sign(user, "s3cr3t");
+        let token = jwt.sign(payload, "s3cr3t");
         return Success200(res, {
-          user,
+          payload,
           token
         });
       } 
       return Error4xx(res, 401, "Email or Password doesn't match");
     }
-    return Error4xx(res, 401, "Email or Password doesn't match");
+    return Error4xx(res, 404, "You are not registered yet");
   } catch (err) {
     return Error500(res, err.message);
   }
