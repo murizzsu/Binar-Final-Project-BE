@@ -2,6 +2,7 @@ const { Products, Users, Categories, Images } = require("../../models");
 const { OPEN_FOR_BID_PRODUCT, WAITING_FOR_BID_PRODUCT, SOLD_PRODUCT } = require('../../helpers/database/enums');
 const { Success200 } = require("../../helpers/response/success");
 const { Error500 } = require("../../helpers/response/error");
+const { Op } = require("sequelize");
 
 const newMultipleProductsResponse = (products) => (
   products.map(product => ({
@@ -34,10 +35,10 @@ async function productGet(req, res) {
     let queryImages = {}
     let queryUsers = {}
     let queryCategories = {}
-    console.log(req.query)
 
     const whitelistStatusProducts = [OPEN_FOR_BID_PRODUCT, WAITING_FOR_BID_PRODUCT, SOLD_PRODUCT]
-    const { statusProduct, user_id } = req.query
+    const { excludeStatusProduct, excludeUserId, statusProduct, category, user_id } = req.query
+
 
     if (whitelistStatusProducts.includes(statusProduct)){
       queryProducts = { ...queryProducts, status: statusProduct }
@@ -47,7 +48,20 @@ async function productGet(req, res) {
       queryProducts = { ...queryProducts, user_id: user_id }
     }
 
+    if (excludeStatusProduct){
+      queryProducts = { ...queryProducts, status: { [Op.not]: excludeStatusProduct }}
+    }
 
+    if (excludeUserId){
+      queryProducts = { ...queryProducts, user_id: { [Op.not]: excludeUserId }}
+    }
+
+    if (category){
+      queryCategories = { ...queryCategories, name: category }
+    }
+
+
+    console.log(queryCategories)
 
     const products = await Products.findAll({
       where: queryProducts,
