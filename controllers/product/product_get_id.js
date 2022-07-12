@@ -18,7 +18,8 @@ const newGetProductByIDResponse = (product) => ({
     category: {
         id: product.category.id,
         name: product.category.name
-    }
+    }, 
+    images: product.images.map(product => product.name)
 });
 
 // {
@@ -73,15 +74,18 @@ async function productGetByID(req, res) {
                     model: Categories,
                     as: 'category',
                     where: queryCategory
+                }, {
+                    model: Images,
+                    as: 'images',
                 }
             ]
         });
-        console.log(product);
         if (product){
             return Success200(res, newGetProductByIDResponse(product));
         }
         return Error4xx(res, 404, "Product Not Found");
     } catch (err) {
+        console.log(err)
         return Error500(res, err.message);
     }
 }

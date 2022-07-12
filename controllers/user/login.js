@@ -26,7 +26,7 @@ async function login(req, res) {
         };
         let token = jwt.sign(payload, "s3cr3t");
         return Success200(res, {
-          payload,
+          user: payload,
           token
         });
       } 

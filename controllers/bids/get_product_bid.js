@@ -79,10 +79,6 @@ const GetProductBid = async (req, res) => {
                     include: {
                         model: Users,
                         as: 'user',
-                        include: {
-                            model: Images,
-                            as: 'image'
-                        }
                     },
                 }, {
                     model: Categories,

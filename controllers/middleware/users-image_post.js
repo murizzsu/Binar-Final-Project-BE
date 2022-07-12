@@ -8,6 +8,7 @@ async function usersImagePost(req, res) {
     try {
         const { id: userId } = req.user;
 
+        console.log(req.file)
         const uploadedImage = req.file.path
 
         const user = await Users.findOne({
@@ -19,9 +20,11 @@ async function usersImagePost(req, res) {
         if (user){
             if (user.id === userId){
                 const insertedImages = user.image_url;
-                const file = insertedImages.split('/').pop();
-                const filename = file.split(".")[0] ;
-                await removeFileInCloudinary(USER_STORAGE, filename);
+                if (insertedImages){
+                    const file = insertedImages.split('/').pop();
+                    const filename = file.split(".")[0] ;
+                    await removeFileInCloudinary(USER_STORAGE, filename);
+                }
                 
                 await Users.update({
                     image_url: uploadedImage
@@ -39,6 +42,7 @@ async function usersImagePost(req, res) {
 
         
     } catch (err) {
+        console.log(err)
         return Error500(res, err.message);
     }
 }
