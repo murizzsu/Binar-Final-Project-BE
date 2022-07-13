@@ -30,6 +30,9 @@ module.exports = {
     soldProduct: require("./user/product_sold"),
     bidProduct : require("./user/product_bid"),
     currentUser: require("./user/current_user"),
+    notification: require("./user/notification"),
+    updateNotification: require("./user/update_notification"),
+
     
     // Bids
     GetProductBid: require('./bids/get_product_bid'),
