@@ -20,6 +20,8 @@ app.get("/api/v1/currentuser", controllers.authenticator, controllers.currentUse
 app.get("/api/v1/products/sold",controllers.authenticator,controllers.soldProduct);
 app.get("/api/v1/products/sale",controllers.authenticator, controllers.saleProduct);
 app.get("/api/v1/products/bid", controllers.authenticator, controllers.bidProduct);
+app.get("/api/v1/notification",controllers.authenticator, controllers.notification);
+app.put("/api/v1/notification/:id",controllers.authenticator,controllers.updateNotification);
 
 // products
 app.get("/api/v1/categories", controllers.GetAllCategories);
@@ -34,9 +36,8 @@ app.delete("/api/v1/products/:id", controllers.authenticator, controllers.produc
 // bids
 app.get('/api/v1/products/:productId/bids', controllers.authenticator, controllers.GetProductBid,);
 app.post('/api/v1/products/:productId/bids', controllers.authenticator, controllers.CreateProductBid,);
-
-
 app.put('/api/v1/bids/:bidsId', controllers.authenticator, controllers.UpdateStatusBid);
+
 // https://www.npmjs.com/package/swagger-ui-express
 const options = {
     swaggerOptions: {
