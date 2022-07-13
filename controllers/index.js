@@ -7,6 +7,7 @@ module.exports = {
 
     // Product
     GetAllCategories: require('./product/get_all_category'),
+    GetWishlist: require('./product/get_wishlist'),
     productPost: require("./product/product_post"),
     productGet: require("./product/product_get"),
     productGetByID: require("./product/product_get_id"),
@@ -32,6 +33,7 @@ module.exports = {
     currentUser: require("./user/current_user"),
     
     // Bids
+    GetBids: require('./bids/get_bids'),
     GetProductBid: require('./bids/get_product_bid'),
     CreateProductBid: require('./bids/create_product_bid'),
     UpdateStatusBid: require('./bids/update_status_bid'),

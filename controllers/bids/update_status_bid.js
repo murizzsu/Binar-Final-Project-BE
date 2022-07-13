@@ -1,7 +1,7 @@
 const { Error4xx, Error500 } = require('../../helpers/response/error');
 const { Success200 } = require('../../helpers/response/success');
 const { Bids } = require('../../models');
-const { PENDING_BIDS, REJECTED_BIDS, ACCEPTED_BIDS } = require('../../helpers/database/enums');
+const { PENDING_BIDS, REJECTED_BIDS, ACCEPTED_BIDS, WAITING_FOR_NEGOTIATION_BIDS } = require('../../helpers/database/enums');
 
 const UpdateStatusBid = async (req, res) => {
     try{
@@ -9,7 +9,7 @@ const UpdateStatusBid = async (req, res) => {
         const { status } = req.body;
         
 
-        const whiteListStatus = [ REJECTED_BIDS, ACCEPTED_BIDS ];
+        const whiteListStatus = [ WAITING_FOR_NEGOTIATION_BIDS, REJECTED_BIDS, ACCEPTED_BIDS ];
 
         if (whiteListStatus.includes(status)){
             const bid = await Bids.findOne({
