@@ -37,9 +37,9 @@ module.exports = (sequelize, DataTypes) => {
     category_id: DataTypes.INTEGER,
     name: DataTypes.STRING,
     price: DataTypes.FLOAT,
-    description: DataTypes.STRING,
+    description: DataTypes.TEXT,
     // sold: DataTypes.BOOLEAN,
-    status: DataTypes.ENUM('open_for_bid', 'waiting_for_bid', 'sold'),
+    status: DataTypes.ENUM('open_for_bid', 'sold'),
   }, {
     sequelize,
     modelName: 'Products',

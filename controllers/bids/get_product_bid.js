@@ -2,6 +2,7 @@ const { Error4xx, Error500 } = require('../../helpers/response/error');
 const { Success200 } = require('../../helpers/response/success');
 const sequelize = require('sequelize');
 const { Bids, Products, Categories, Users, Images } = require('../../models');
+const { WAITING_FOR_NEGOTIATION_BIDS, PENDING_BIDS } = require('../../helpers/database/enums');
 
 const NewResponseProductBids = (product) => {
     return {
@@ -24,8 +25,13 @@ const NewResponseProductBids = (product) => {
                 city: bid.user.city,
                 address: bid.user.address,
                 phone: bid.user.phone,
-                image: bid.user.image?.name,
-            }
+                image: bid.user.image_url,
+            },
+            createdAt: bid.createdAt
+        })),
+        images: product.images?.map(image => ({
+            id: image.id,
+            name: image.name
         }))
     };
     
@@ -83,13 +89,17 @@ const GetProductBid = async (req, res) => {
                 }, {
                     model: Categories,
                     as: 'category'
+                }, {
+                    model: Images,
+                    as: 'images'
                 }
             ],
             order: sequelize.literal(`(
                 CASE 
-                WHEN "bids"."status" = 'accepted' THEN 1 
-                WHEN "bids"."status" = 'pending'  THEN 2 
-                ELSE 3 END
+                WHEN "bids"."status" = ${ACCEPTED_BIDS} THEN 1 
+                WHEN "bids"."status" = ${WAITING_FOR_NEGOTIATION_BIDS} THEN 2 
+                WHEN "bids"."status" = ${PENDING_BIDS}  THEN 3
+                ELSE 4 END
             ) ASC`)
         });
 

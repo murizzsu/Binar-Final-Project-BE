@@ -36,9 +36,20 @@ const UpdateStatusBid = async (req, res) => {
                 switch (status){
                     case REJECTED_BIDS:
                         return Success200(res, "Successfully rejected bid");
-                    case ACCEPTED_BIDS:
-                        return Success200(res, "Successfully accepted bid");
+                    case WAITING_FOR_NEGOTIATION_BIDS:
+                        return Success200(res, "Successfully accepting bid.")
+                    default:
+                        return Error4xx(res, "BadRequest")
                 }
+            } else if (bid.status === WAITING_FOR_NEGOTIATION_BIDS && status === ACCEPTED_BIDS){
+                const updatedBid = await Bids.update({
+                    status: ACCEPTED_BIDS
+                }, {
+                    where: {
+                        id: bidsId
+                    }
+                })
+                return Success200(res, "Successfully done transaction")
             }
             return Error4xx(res, 400, "BadRequest");
         } 
