@@ -13,6 +13,9 @@ module.exports = {
         }
     );
     
+    if (process.env.NODE_ENV == "test") {
+      return;
+    }
     return replaceEnum({
         tableName: 'products',
         columnName: 'status',

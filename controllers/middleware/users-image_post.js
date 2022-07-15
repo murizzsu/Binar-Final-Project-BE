@@ -2,14 +2,13 @@ const { USER_STORAGE } = require('../../config/cloudinaryStorage');
 const { Error4xx, Error500 } = require('../../helpers/response/error');
 const { Users } = require('../../models');
 const { removeFileInCloudinary } = require('../../helpers/cloudinary/destroy');
-const { Success200 } = require('../../helpers/response/success')
+const { Success200 } = require('../../helpers/response/success');
 
 async function usersImagePost(req, res) {
     try {
         const { id: userId } = req.user;
-
-        console.log(req.file)
-        const uploadedImage = req.file.path
+        console.log(req.file);
+        const uploadedImage = req.file.path;
 
         const user = await Users.findOne({
             where: {
@@ -42,7 +41,7 @@ async function usersImagePost(req, res) {
 
         
     } catch (err) {
-        console.log(err)
+        console.log(err);
         return Error500(res, err.message);
     }
 }

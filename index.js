@@ -25,7 +25,7 @@ app.put("/api/v1/notification/:id",controllers.authenticator,controllers.updateN
 
 // products
 app.get("/api/v1/categories", controllers.GetAllCategories);
-app.get('/api/v1/products/wishlist', controllers.authenticator, controllers.GetWishlist)
+app.get('/api/v1/products/wishlist', controllers.authenticator, controllers.GetWishlist);
 app.post("/api/v1/products", controllers.authenticator, controllers.productPost);
 app.post("/api/v1/productsimageupload", controllers.authenticator, controllers.imageUpload.products, controllers.productsImagePost);
 app.get("/api/v1/products", controllers.productGet);

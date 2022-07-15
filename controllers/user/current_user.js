@@ -37,7 +37,7 @@ async function currentUser(req, res) {
     } 
     return Error4xx(res, 401, "You are unauthorized");
   } catch (err) {
-    console.log(err)
+    console.log(err);
     return Error500(res, err.message);
   }
 }

@@ -32,6 +32,7 @@
     "eslint": "eslint",
     "lint": "eslint .",
     "jest": "jest",
+    "pretest": "export NODE_ENV=test && sequelize-cli db:migrate --env test && sequelize-cli db:seed:all --env test",
     "test": "jest --coverage"
   },
   "devDependencies": {

@@ -8,8 +8,8 @@ async function productPut(req, res) {
     let header = req.headers.authorization.split("Bearer ")[1];
     let user = jwt.verify(header, "s3cr3t");
 
-    let { id: userId } = req.user
-    const { id: idInput } = req.params
+    let { id: userId } = req.user;
+    const { id: idInput } = req.params;
     const product = await Products.findOne({
       where: {
         id: idInput

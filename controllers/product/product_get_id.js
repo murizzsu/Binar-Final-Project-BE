@@ -85,7 +85,7 @@ async function productGetByID(req, res) {
         }
         return Error4xx(res, 404, "Product Not Found");
     } catch (err) {
-        console.log(err)
+        console.log(err);
         return Error500(res, err.message);
     }
 }
