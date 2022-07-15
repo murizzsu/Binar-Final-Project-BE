@@ -34,7 +34,9 @@ async function login(req, res) {
     }
     return Error4xx(res, 404, "You are not registered yet");
   } catch (err) {
+    console.log(err);
     return Error500(res, err.message);
+
   }
 
 }

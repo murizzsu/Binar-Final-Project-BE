@@ -20,6 +20,11 @@ module.exports = (sequelize, DataTypes) => {
         as: 'product',
         foreignKey: 'product_id',
       });
+
+      Bids.hasOne(models.Notifications,{
+        as: "notification",
+        foreignKey: 'bid_id',
+      });
     }
   }
   Bids.init({

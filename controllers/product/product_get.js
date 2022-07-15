@@ -27,41 +27,41 @@ const newMultipleProductsResponse = (products) => (
       name: image.name,
     }))
   }))
-)
+);
 
 async function productGet(req, res) {
   try {
-    let queryProducts = {}
-    let queryImages = {}
-    let queryUsers = {}
-    let queryCategories = {}
+    let queryProducts = {};
+    let queryImages = {};
+    let queryUsers = {};
+    let queryCategories = {};
 
-    const whitelistStatusProducts = [OPEN_FOR_BID_PRODUCT, WAITING_FOR_BID_PRODUCT, SOLD_PRODUCT]
-    const { excludeStatusProduct, excludeUserId, statusProduct, category, user_id } = req.query
+    const whitelistStatusProducts = [OPEN_FOR_BID_PRODUCT, WAITING_FOR_BID_PRODUCT, SOLD_PRODUCT];
+    const { excludeStatusProduct, excludeUserId, statusProduct, category, user_id } = req.query;
 
 
     if (whitelistStatusProducts.includes(statusProduct)){
-      queryProducts = { ...queryProducts, status: statusProduct }
+      queryProducts = { ...queryProducts, status: statusProduct };
     }
 
     if (user_id){
-      queryProducts = { ...queryProducts, user_id: user_id }
+      queryProducts = { ...queryProducts, user_id: user_id };
     }
 
     if (excludeStatusProduct){
-      queryProducts = { ...queryProducts, status: { [Op.not]: excludeStatusProduct }}
+      queryProducts = { ...queryProducts, status: { [Op.not]: excludeStatusProduct }};
     }
 
     if (excludeUserId){
-      queryProducts = { ...queryProducts, user_id: { [Op.not]: excludeUserId }}
+      queryProducts = { ...queryProducts, user_id: { [Op.not]: excludeUserId }};
     }
 
     if (category){
-      queryCategories = { ...queryCategories, name: category }
+      queryCategories = { ...queryCategories, name: category };
     }
 
 
-    console.log(queryCategories)
+    console.log(queryCategories);
 
     const products = await Products.findAll({
       where: queryProducts,
@@ -82,7 +82,7 @@ async function productGet(req, res) {
         }
       ],
       order: [['id', 'DESC']]
-    })
+    });
     // const productsList = await Products.findAll({ where: { status: OPEN_FOR_BID } });
     // const imagesList = await Images.findAll();
     
@@ -125,10 +125,10 @@ async function productGet(req, res) {
     //   }
     //   products.push(data);
     // } 
-    return Success200(res, newMultipleProductsResponse(products))
+    return Success200(res, newMultipleProductsResponse(products));
   } catch (err) {
-    console.log(err)
-    return Error500(res, err)
+    console.log(err);
+    return Error500(res, err);
   }
 }
 

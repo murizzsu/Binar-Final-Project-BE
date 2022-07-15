@@ -1,11 +1,11 @@
-const config = new URL(process.env.DATABASE_URL || "postgres://postgres:kelvin123@127.0.0.1:5432/binar_final_project");
+const config = new URL(process.env.DATABASE_URL || "postgres://postgres:postgres@127.0.0.1:5432/binar_final_project");
 
 const {
   DB_USER = config.username,
   DB_PASSWORD = config.password,
   DB_NAME = config.pathname.replace("/", ""),
   DB_HOST = config.hostname,
-  DB_PORT = "5434",
+  DB_PORT = "5432",
 } = process.env;
 
 // console.log(DB_USER,
