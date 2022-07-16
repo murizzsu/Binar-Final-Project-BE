@@ -4,12 +4,14 @@ const app = express();
 const controllers = require("./controllers");
 const swaggerUI = require("swagger-ui-express");
 const { Bids, Products, Images } = require('./models');
+var morgan = require('morgan')
 
 const {  PORT = 8000 } = process.env;
 
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(morgan('tiny'))
 
 // users
 app.post("/api/v1/login", controllers.login);

@@ -2,7 +2,7 @@ const { Error4xx, Error500 } = require('../../helpers/response/error');
 const { Success200 } = require('../../helpers/response/success');
 const sequelize = require('sequelize');
 const { Bids, Products, Categories, Users, Images } = require('../../models');
-const { WAITING_FOR_NEGOTIATION_BIDS, PENDING_BIDS } = require('../../helpers/database/enums');
+const { ACCEPTED_BIDS, WAITING_FOR_NEGOTIATION_BIDS, PENDING_BIDS } = require('../../helpers/database/enums');
 
 const NewResponseProductBids = (product) => {
     return {
@@ -96,9 +96,9 @@ const GetProductBid = async (req, res) => {
             ],
             order: sequelize.literal(`(
                 CASE 
-                WHEN "bids"."status" = ${ACCEPTED_BIDS} THEN 1 
-                WHEN "bids"."status" = ${WAITING_FOR_NEGOTIATION_BIDS} THEN 2 
-                WHEN "bids"."status" = ${PENDING_BIDS}  THEN 3
+                WHEN "bids"."status" = '${ACCEPTED_BIDS}' THEN 1 
+                WHEN "bids"."status" = '${WAITING_FOR_NEGOTIATION_BIDS}' THEN 2 
+                WHEN "bids"."status" = '${PENDING_BIDS}'  THEN 3
                 ELSE 4 END
             ) ASC`)
         });
