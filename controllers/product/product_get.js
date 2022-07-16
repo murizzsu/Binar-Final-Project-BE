@@ -37,10 +37,14 @@ async function productGet(req, res) {
     let queryCategories = {}
 
     const whitelistStatusProducts = [OPEN_FOR_BID_PRODUCT, SOLD_PRODUCT]
-    const { excludeStatusProduct, excludeUserId, statusProduct, category, user_id } = req.query
+    const { search, excludeStatusProduct, excludeUserId, statusProduct, category, user_id } = req.query
 
     if (whitelistStatusProducts.includes(statusProduct)){
       queryProducts = { ...queryProducts, status: statusProduct }
+    }
+
+    if (search){
+      queryProducts = { ...queryProducts, name: { [ Op.iLike ]: `%${search}%` } }
     }
 
     if (user_id){
@@ -59,7 +63,6 @@ async function productGet(req, res) {
       queryCategories = { ...queryCategories, name: category }
     }
 
-    console.log(queryProducts, queryUsers)
     const products = await Products.findAll({
       where: queryProducts,
       include: [
