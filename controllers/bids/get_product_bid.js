@@ -96,9 +96,9 @@ const GetProductBid = async (req, res) => {
             ],
             order: sequelize.literal(`(
                 CASE 
-                WHEN "bids"."status" = ${ACCEPTED_BIDS} THEN 1 
-                WHEN "bids"."status" = ${WAITING_FOR_NEGOTIATION_BIDS} THEN 2 
-                WHEN "bids"."status" = ${PENDING_BIDS}  THEN 3
+                WHEN "bids"."status" = '${ACCEPTED_BIDS}' THEN 1 
+                WHEN "bids"."status" = '${WAITING_FOR_NEGOTIATION_BIDS}' THEN 2 
+                WHEN "bids"."status" = '${PENDING_BIDS}'  THEN 3
                 ELSE 4 END
             ) ASC`)
         });
