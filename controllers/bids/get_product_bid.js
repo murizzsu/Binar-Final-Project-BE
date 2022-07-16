@@ -2,7 +2,7 @@ const { Error4xx, Error500 } = require('../../helpers/response/error');
 const { Success200 } = require('../../helpers/response/success');
 const sequelize = require('sequelize');
 const { Bids, Products, Categories, Users, Images } = require('../../models');
-const { WAITING_FOR_NEGOTIATION_BIDS, PENDING_BIDS } = require('../../helpers/database/enums');
+const { ACCEPTED_BIDS, WAITING_FOR_NEGOTIATION_BIDS, PENDING_BIDS } = require('../../helpers/database/enums');
 
 const NewResponseProductBids = (product) => {
     return {
