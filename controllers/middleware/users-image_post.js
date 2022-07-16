@@ -7,7 +7,7 @@ const { Success200 } = require('../../helpers/response/success');
 async function usersImagePost(req, res) {
     try {
         const { id: userId } = req.user;
-        console.log(req.file);
+
         const uploadedImage = req.file.path;
 
         const user = await Users.findOne({

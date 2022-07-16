@@ -34,7 +34,6 @@ const GetWishlist = async (req, res) => {
 
         productIds = productIds.map(productId => productId.product_id);
     
-        console.log(productIds);
         const products = await Products.findAll({
             where: {
                 id: productIds,

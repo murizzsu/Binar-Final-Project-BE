@@ -34,7 +34,6 @@ const GetBids = async (req, res) => {
             ) ASC`);
         }
 
-        console.log(queryBids, queryProduct);
         const bids = await Bids.findAll({
             where: queryBids,
             include: [
