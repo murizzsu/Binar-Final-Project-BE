@@ -38,6 +38,7 @@ module.exports = {
     // Bids
     GetBids: require('./bids/get_bids'),
     GetProductBid: require('./bids/get_product_bid'),
+    CheckBids: require('./bids/check_bid'),
     CreateProductBid: require('./bids/create_product_bid'),
     UpdateStatusBid: require('./bids/update_status_bid'),
 };
