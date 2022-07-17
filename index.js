@@ -42,6 +42,7 @@ app.post('/api/v1/products/:productId/bids', controllers.authenticator, controll
 
 
 app.get('/api/v1/bids', controllers.authenticator, controllers.GetBids);
+app.post('/api/v1/bids/check', controllers.authenticator, controllers.CheckBids);
 app.put('/api/v1/bids/:bidsId', controllers.authenticator, controllers.UpdateStatusBid);
 
 // https://www.npmjs.com/package/swagger-ui-express
