@@ -36,20 +36,15 @@ async function productGet(req, res) {
     let queryUsers = {};
     let queryCategories = {};
 
-<<<<<<< controllers/product/product_get.js
     const whitelistStatusProducts = [OPEN_FOR_BID_PRODUCT, SOLD_PRODUCT];
-    const { excludeStatusProduct, excludeUserId, statusProduct, category, user_id } = req.query;
-=======
-    const whitelistStatusProducts = [OPEN_FOR_BID_PRODUCT, SOLD_PRODUCT]
-    const { search, excludeStatusProduct, excludeUserId, statusProduct, category, user_id } = req.query
->>>>>>> controllers/product/product_get.js
+    const { search, excludeStatusProduct, excludeUserId, statusProduct, category, user_id } = req.query;
 
     if (whitelistStatusProducts.includes(statusProduct)){
       queryProducts = { ...queryProducts, status: statusProduct };
     }
 
     if (search){
-      queryProducts = { ...queryProducts, name: { [ Op.iLike ]: `%${search}%` } }
+      queryProducts = { ...queryProducts, name: { [ Op.iLike ]: `%${search}%` } };
     }
 
     if (user_id){
@@ -68,10 +63,6 @@ async function productGet(req, res) {
       queryCategories = { ...queryCategories, name: category };
     }
 
-<<<<<<< controllers/product/product_get.js
-    console.log(queryProducts, queryUsers);
-=======
->>>>>>> controllers/product/product_get.js
     const products = await Products.findAll({
       where: queryProducts,
       include: [

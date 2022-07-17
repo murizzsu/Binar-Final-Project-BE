@@ -1,6 +1,6 @@
 const { Error4xx, Error500 } = require('../../helpers/response/error');
 const { Success200 } = require('../../helpers/response/success');
-const { Bids } = require('../../models');
+const { Bids, Products } = require('../../models');
 const { PENDING_BIDS, REJECTED_BIDS, ACCEPTED_BIDS, WAITING_FOR_NEGOTIATION_BIDS, SOLD_PRODUCT } = require('../../helpers/database/enums');
 const { Op } = require('sequelize');
 
@@ -46,9 +46,9 @@ const UpdateStatusBid = async (req, res) => {
                         where: {
                             id: bidsId,
                         }
-                    })
+                    });
 
-                    return Success200(res, "Successfully rejected bid after negotiation")
+                    return Success200(res, "Successfully rejected bid after negotiation");
                 } else if (status === ACCEPTED_BIDS){
                     const [ updatedBidBid, rejectedBids, _ ] = await Promise.all([
                         Bids.update({
@@ -77,15 +77,15 @@ const UpdateStatusBid = async (req, res) => {
                                 id: bid.product_id,
                             }
                         })
-                    ])
-                    return Success200(res, "Successfully done transaction")
+                    ]);
+                    return Success200(res, "Successfully done transaction");
                 }
             }
             return Error4xx(res, 400, "BadRequest");
         } 
         return Error4xx(res, 400, "BadRequest");
     } catch(err){
-        console.log(err)
+        console.log(err);
         Error500(res, err.message);
     }
 };

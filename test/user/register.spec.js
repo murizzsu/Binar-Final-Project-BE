@@ -1,4 +1,4 @@
-const register = require("../controllers/user/register");
+const register = require("../../controllers/user/register");
 const express = require("express");
 const request = require("supertest");
 

@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
-const { Users } = require("../models");
-const profil = require("../controllers/user/profil");
-const authenticator = require("../controllers/middleware/authenticator");
+const { Users } = require("../../models");
+const profil = require("../../controllers/user/profil");
+const authenticator = require("../../controllers/middleware/authenticator");
 const express = require("express");
 const request = require("supertest");
 

@@ -1,4 +1,4 @@
-const login = require("../controllers/user/login");
+const login = require("../../controllers/user/login");
 const express = require("express");
 const request = require("supertest");
 
