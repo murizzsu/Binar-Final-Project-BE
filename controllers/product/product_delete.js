@@ -5,8 +5,8 @@ const { Error4xx, Error500 } = require("../../helpers/response/error");
 
 async function productDelete(req, res) {
     try {
-        const { id: userId } = req.user
-        const { id: productId } = req.params.id
+        const { id: userId } = req.user;
+        const { id: productId } = req.params.id;
         const product = await Products.findOne({
             where: {
                 id: idInput

@@ -34,9 +34,9 @@ const UpdateStatusBid = async (req, res) => {
                     case REJECTED_BIDS:
                         return Success200(res, "Successfully rejected bid");
                     case WAITING_FOR_NEGOTIATION_BIDS:
-                        return Success200(res, "Successfully accepting bid.")
+                        return Success200(res, "Successfully accepting bid.");
                     default:
-                        return Error4xx(res, "BadRequest")
+                        return Error4xx(res, "BadRequest");
                 }
             } else if (bid.status === WAITING_FOR_NEGOTIATION_BIDS){
                 if (status === REJECTED_BIDS){

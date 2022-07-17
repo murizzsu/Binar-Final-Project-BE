@@ -6,15 +6,20 @@ const decryptFunction = require("../encrypt-decrypt/decrypt_pass");
 
 async function login(req, res) {
   try {
+    if (!req.body.email || !req.body.password){
+      return Error4xx(res, 400, "Bad Request");
+    }
+
     let user = await Users.findOne({
       where: { email: req.body.email },
     });
-    
+
     if (user) {
       let isPasswordCorrect = await decryptFunction(
         user.password,
         req.body.password
       );
+
       if (isPasswordCorrect) {
         let payload = {
           id: user.id, 
@@ -36,7 +41,7 @@ async function login(req, res) {
   } catch (err) {
     return Error500(res, err.message);
   }
-
 }
 
 module.exports = login;
+
