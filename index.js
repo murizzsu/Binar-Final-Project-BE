@@ -3,13 +3,15 @@ const cors = require("cors");
 const app = express();
 const controllers = require("./controllers");
 const swaggerUI = require("swagger-ui-express");
-const { Products, Images } = require('./models');
+const { Bids, Products, Images } = require('./models');
+var morgan = require('morgan');
 
 const {  PORT = 8000 } = process.env;
 
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(morgan('tiny'));
 
 // users
 app.post("/api/v1/login", controllers.login);
@@ -21,10 +23,15 @@ app.get("/api/v1/products/sold",controllers.authenticator,controllers.soldProduc
 app.get("/api/v1/products/sale",controllers.authenticator, controllers.saleProduct);
 app.get("/api/v1/products/bid", controllers.authenticator, controllers.bidProduct);
 app.get("/api/v1/notification",controllers.authenticator, controllers.notification);
+<<<<<<< index.js
 app.put("/api/v1/notification/:id", controllers.authenticator, controllers.UpdateNotification);
+=======
+app.put("/api/v1/notification/:id",controllers.authenticator,controllers.updateNotification);
+>>>>>>> index.js
 
 // products
 app.get("/api/v1/categories", controllers.GetAllCategories);
+app.get('/api/v1/products/wishlist', controllers.authenticator, controllers.GetWishlist);
 app.post("/api/v1/products", controllers.authenticator, controllers.productPost);
 app.post("/api/v1/productsimageupload", controllers.authenticator, controllers.imageUpload.products, controllers.productsImagePost);
 app.get("/api/v1/products", controllers.productGet);
@@ -38,7 +45,10 @@ app.get('/api/v1/products/:productId/bids', controllers.authenticator, controlle
 app.post('/api/v1/products/:productId/bids', controllers.authenticator, controllers.CreateProductBid);
 
 
+app.get('/api/v1/bids', controllers.authenticator, controllers.GetBids);
+app.post('/api/v1/bids/check', controllers.authenticator, controllers.CheckBids);
 app.put('/api/v1/bids/:bidsId', controllers.authenticator, controllers.UpdateStatusBid);
+
 // https://www.npmjs.com/package/swagger-ui-express
 const options = {
     swaggerOptions: {

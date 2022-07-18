@@ -10,7 +10,7 @@ async function profil(req, res) {
     let check = await Users.findByPk(user.id);
 
     if (check) {
-      const { name, city, address, phone } = req.body
+      const { name, city, address, phone } = req.body;
 
       await Users.update(
         {

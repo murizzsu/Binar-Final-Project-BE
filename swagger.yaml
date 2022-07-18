@@ -21,24 +21,27 @@ components:
     Login:
       type: object
       properties:
-        # id:
-        #   type: number
-        #   example: 1
-        # name:
-        #   type: string
-        #   example: name
-        # city:
-        #   type: string
-        #   example: city
-        # address:
-        #   type: string
-        #   example: city 
-        # phone:
-        #   type: string
-        #   example: 085754210823 
+        user:
+          type: object
+          properties:
+            id:
+              type: number
+              example: 1
+            email:
+              type: string
+              example: name@gmail.com
+            city:
+              type: string
+              example: city
+            address:
+              type: string
+              example: address
+            phone: 
+              type: string
+              example: 085754210823
         token:
           type: string
-          example: 2log16x25A
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJ3YWZpQGdtYWlsLmNvbSIsIm5hbWUiOiJ3YWZpIiwiY2l0eSI6ImNpdHkiLCJhZGRyZXNzIjoiYWRkcmVzcyIsInBob25lIjoiMDg0Mjg0MjM0Mnh4IiwiaWF0IjoxNjU3NzEyMTc4fQ.bOik1mBzQVCBG_C0yq-2HW86S4PuIxE2V3Z1RQUjf0c
     LoginData:
       type: object
       properties:
@@ -60,18 +63,32 @@ components:
         password:
           type: string
           example: 12345
-    ProfilData:
+    RegisterDataRes:
       type: object
       properties:
+        id:
+          type: number
+          example: 1
         name:
           type: string
           example: name
         email:
           type: string
           example: name@gmail.com
-        password:
+        created_att:
+          type: number
+          format: datetime
+          example: 1970-01-01 00:00:01  
+        updated_at:
+          type: number
+          format: datetime
+          example: 1970-01-01 00:00:01
+        message:
           type: string
-          example: 12345
+          example: Email kamu berhasil terdaftar
+    ProfilData:
+      type: object
+      properties:
         city:
           type: string
           example: city
@@ -98,13 +115,13 @@ components:
           example: city
         address:
           type: string
-          example: city 
+          example: address 
         phone:
           type: string
           example: 085754210823 
-        image:
+        image_url:
           type: string
-          example: users-image_1
+          example: https://res.cloudinary.com/djann8mt5/image/upload/v1657631544/binar-final-project/users/jqayyrhulgligcs6ucpd.jpg
     CurrentUser:
       type: object
       properties:
@@ -119,14 +136,14 @@ components:
           example: city
         address:
           type: string
-          example: city 
+          example: address 
         phone:
           type: string
           example: 085754210823
         image:
           type: string
-          example: users-image_1
-    Products:
+          example: https://res.cloudinary.com/djann8mt5/image/upload/v1657631544/binar-final-project/users/jqayyrhulgligcs6ucpd.jpg
+    ProductsPost:
       type: object
       properties:
         user_id:
@@ -145,27 +162,72 @@ components:
         description:
           type: string
           example: productDescription
-        # images:
-        #   type: array
-        #   items:
-        #     type: string
-        #   example: 
-        #     [
-        #     "Images_product_1-1",
-        #     "Images_product_1-2",
-        #     "Images_product_1-3",
-        #     "Images_product_1-4"
-        #     ]
-    ProductsId:
+    Products:
+      type: object
+      properties:
+        category_id:
+          type: number
+          example: 1
+        name:
+          type: string
+          example: productName
+        price:
+          type: number
+          format: float
+          example: 100000.2
+        description:
+          type: string
+          example: productDescription
+    AllProducts:
       type: object
       properties:
         id:
           type: number
           example: 1
-        user_id:
+        name:
+          type: string
+          example: productName
+        price:
           type: number
-          example: 1
-        category_id:
+          format: float
+          example: 100000.2
+        description:
+          type: string
+          example: productDescription
+        status:
+          type: string
+          example: open_for_bid
+        category:
+          type: object
+          properties:
+            id:
+              type: number
+              example: 1
+            name:
+              type: string
+              example: categoryName
+        owner:
+          type: object
+          properties:
+            id: 
+              type: number
+              example: 1
+            name: 
+              type: string
+              example: name
+            city:
+              type: string
+              example: city
+            address:
+              type: string
+              example: address
+            phone:
+              type: string
+              example: 085754210821
+    ProductsId:
+      type: object
+      properties:
+        id:
           type: number
           example: 1
         name:
@@ -178,28 +240,34 @@ components:
         description:
           type: string
           example: productDescription
-        sold:
-          type: boolean
-          example: false
-        images:
-          type: array
-          items:
-            type: string
-          example: 
-            [
-            "Images_product_1-1",
-            "Images_product_1-2",
-            "Images_product_1-3",
-            "Images_product_1-4"
-            ]
-        created_at:
-          type: number
-          format: datetime
-          example: 1970-01-01 00:00:01
-        updated_at:
-          type: number
-          format: datetime
-          example: 1970-01-01 00:00:01
+        status:
+          type: string
+          example: open_for_bid
+        owner:  
+          type: object
+          properties:
+            id:
+              type: number
+              example: 1
+            name:
+              type: string
+              example: name
+            city: 
+              type: string
+              example: city
+            image_url:
+              type: string
+              example: "https://res.cloudinary.com/djann8mt5/image/upload/v1657631544/binar-final-project/users/jqayyrhulgligcs6ucpd.jpg"
+        category:
+          type: object
+          properties:
+            id:
+              type: number
+              example: 1
+            name:
+              type: string
+              example: categoryName
+
   requestBodies:
     LoginRequest:
       content:
@@ -221,6 +289,11 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/Products"
+    ProductsPostRequest:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProductsPost"
     ProductsRequestId:
       content:
         application/json:
@@ -238,8 +311,14 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/Login"
-    ProfilResponse:
+    RegisterResponse:
       description: ok
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RegisterDataRes"
+    ProfilResponse:
+      description: Successfully updating profile
       content:
         application/json:
           schema:
@@ -263,55 +342,56 @@ components:
           schema:
             type: array
             items:
-              $ref: "#/components/schemas/Products"
+              $ref: "#/components/schemas/AllProducts"
             example:
-              DefaultSample: 
-              value:
-                - id: 1
-                  user_id: 1
-                  category_id: 1
-                  name: productName1
-                  price: 100000.1
-                  description: productDescription1
-                  sold: false
-                  image: [
-                    "Images_product_1-1",
-                    "Images_product_1-2",
-                    "Images_product_1-3",
-                    "Images_product_1-4"
-                    ]
-                  created_at: 1970-01-01 00:00:01
-                  update_at: 1970-01-01 00:00:01
-                - id: 2
-                  user_id: 2
-                  category_id: 2
-                  name: productName2
-                  price: 100000.2
-                  description: productDescription2
-                  sold: false
-                  image: [
-                    "Images_product_2-1",
-                    "Images_product_2-2",
-                    "Images_product_2-3",
-                    "Images_product_2-4"
-                    ]
-                  created_at: 1970-02-02 00:00:02
-                  update_at: 1970-02-02 00:00:02
-                - id: 3
-                  user_id: 3
-                  category_id: 3
-                  name: productName3
-                  price: 100000.3
-                  description: productDescription3
-                  sold: false
-                  image: [
-                    "Images_product_3-1",
-                    "Images_product_3-2",
-                    "Images_product_3-3",
-                    "Images_product_3-4"
-                    ]
-                  created_at: 1970-03-03 00:00:03
-                  updated_at: 1970-03-03 00:00:03
+              - id: 1
+                name: productName1
+                price: 100000.1
+                description: productDescription1
+                status: open_for_bid
+                category:
+                  id: 1
+                  name: categoryName
+                owner:
+                  id: 1
+                  name: name1
+                  city: city1
+                  address: address1
+                  phone: 085754210821
+                images: [                  
+                  {id: 1,
+                  name: "https://res.cloudinary.com/djann8mt5/image/upload/v1657632067/binar-final-project/products/mpcihgalctsoaavwosxr.png"},
+                  {id: 2,
+                  name: "https://res.cloudinary.com/djann8mt5/image/upload/v1657632067/binar-final-project/products/mpcihgalctsoaavwosxr.png"},
+                  {id: 3,
+                  name: "https://res.cloudinary.com/djann8mt5/image/upload/v1657632067/binar-final-project/products/mpcihgalctsoaavwosxr.png"},
+                  {id: 4,
+                  name: "https://res.cloudinary.com/djann8mt5/image/upload/v1657632067/binar-final-project/products/mpcihgalctsoaavwosxr.png"}
+                  ]
+              - id: 2
+                name: productName2
+                price: 100000.2
+                description: productDescription2
+                status: open_for_bid
+                category:
+                  id: 2
+                  name: categoryName
+                owner:
+                  id: 2
+                  name: name2
+                  city: city2
+                  address: address2
+                  phone: 085754210822
+                images: [                  
+                  {id: 5,
+                  name: "https://res.cloudinary.com/djann8mt5/image/upload/v1657632067/binar-final-project/products/mpcihgalctsoaavwosxr.png"},
+                  {id: 6,
+                  name: "https://res.cloudinary.com/djann8mt5/image/upload/v1657632067/binar-final-project/products/mpcihgalctsoaavwosxr.png"},
+                  {id: 7,
+                  name: "https://res.cloudinary.com/djann8mt5/image/upload/v1657632067/binar-final-project/products/mpcihgalctsoaavwosxr.png"},
+                  {id: 8,
+                  name: "https://res.cloudinary.com/djann8mt5/image/upload/v1657632067/binar-final-project/products/mpcihgalctsoaavwosxr.png"}
+                  ]
     ProductsByIdResponses:
       description: ok
       content:
@@ -319,7 +399,7 @@ components:
           schema:
             $ref: "#/components/schemas/ProductsId"
     PutProductsByIDResponses:
-      description: updated
+      description: Successfully updated product
       content:
         application/json:
           schema:
@@ -354,7 +434,7 @@ paths:
         $ref: "#/components/requestBodies/RegisterRequest"
       responses:
         200:
-          description: Success
+          $ref: '#/components/responses/RegisterResponse'
 
   /api/v1/profil:
     put:
@@ -398,33 +478,12 @@ paths:
                 file:
                   type: string
                   format: binary
+                id:
+                  type: number
+                  format: integer
       responses:
         200:
-          description: succes
-
-  /api/v1/products/sale:
-    get:
-      tags:
-        - Users
-      summary: Get Products sale by user
-      description: Get Products sale by user
-      security:
-        - bearerAuth: []
-      responses:
-        200:
-          $ref: "#/components/responses/ProductsByIdResponses"
-          
-  /api/v1/products/sold:
-    get:
-      tags:
-        - Users
-      summary: Get Products sold by user
-      description: Get Products sold by user
-      security:
-        - bearerAuth: []
-      responses:
-        200:
-          description: success
+          description: Succesfully update image profile
     
   /api/v1/products:
     post:
@@ -435,7 +494,7 @@ paths:
       security:
         - bearerAuth: []
       requestBody:
-        $ref: "#/components/requestBodies/ProductsRequest"
+        $ref: "#/components/requestBodies/ProductsPostRequest"
       responses:
         200:
           $ref: "#/components/responses/ProductsByIdResponses"
@@ -443,6 +502,17 @@ paths:
       tags:
         - Products
       summary: Get Products
+      parameters:
+        - in: query
+          name: userId
+          schema:
+            type: integer
+          description: input user id in integer
+        - in: query
+          name: statusProduct
+          schema:
+            type: string
+          description: input status product in string 
       description: Get Products endpoint
       responses:
         200:
@@ -518,8 +588,34 @@ paths:
                   items:
                     type: string
                     format: binary
+                productId:
+                  type: number
+                  format: integer
       responses:
         200:
           description: succes
 
+  # /api/v1/products/sale
+  #   get:
+  #     tags:
+  #       - Users
+  #     summary: Get Products sale by user
+  #     description: Get Products sale by user
+  #     security:
+  #       - bearerAuth: []
+  #     responses:
+  #       200:
+  #         $ref: "#/components/responses/ProductsByIdResponses"
+          
+  # /api/v1/products/sold:
+  #   get:
+  #     tags:
+  #       - Users
+  #     summary: Get Products sold by user
+  #     description: Get Products sold by user
+  #     security:
+  #       - bearerAuth: []
+  #     responses:
+  #       200:
+  #         description: success
   

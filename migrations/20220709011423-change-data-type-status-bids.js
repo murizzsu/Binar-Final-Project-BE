@@ -4,6 +4,9 @@ const { replaceEnum } = require('../helpers/database/replaceEnum');
 
 module.exports = {
   async up(queryInterface, Sequelize) {
+    if (process.env.NODE_ENV == "test") {
+      return;
+    }
     return replaceEnum({
       tableName: 'bids',
       columnName: 'status',

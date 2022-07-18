@@ -18,6 +18,7 @@ Unit Testing:
     - npm install
     - npm run test
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  allow_failure: true
 
 Deploy to Heroku:
   stage: deploy

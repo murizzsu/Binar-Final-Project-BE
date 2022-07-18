@@ -1,14 +1,14 @@
 const { Error4xx, Error500 } = require('../../helpers/response/error');
 const { Success200 } = require('../../helpers/response/success');
 const { Products } = require('../../models');
-const { OPEN_FOR_BID_PRODUCT, WAITING_FOR_BID_PRODUCT, SOLD_PRODUCT } = require('../../helpers/database/enums');
+const { OPEN_FOR_BID_PRODUCT, SOLD_PRODUCT } = require('../../helpers/database/enums');
 
 const UpdateProductStatus = async (req, res) => {
     try{
         const { productId } = req.params;
         const { status } = req.body;
 
-        const whiteListStatus = [OPEN_FOR_BID_PRODUCT, WAITING_FOR_BID_PRODUCT, SOLD_PRODUCT];
+        const whiteListStatus = [OPEN_FOR_BID_PRODUCT, SOLD_PRODUCT];
         if (whiteListStatus.includes(status)){
             const product = await Products.findOne({
                 where: {
