@@ -10,12 +10,14 @@ const { Error500 } = require("../../helpers/response/error");
 
 
 const notificationResponse = (notifications) =>{
+  console.log(notifications);
   return notifications.map((notification) => ({
       id: notification.id,
       user_id: notification.users?notification.users.id:{},
       title: notification.title,
       message: notification.message,
       read: notification.read,
+      createAt : notification.createdAt,
       products:{
           product_id: notification.product_id,
           name: notification.products?notification.products.name : '',
@@ -26,8 +28,9 @@ const notificationResponse = (notifications) =>{
         request_price: notification.bids?notification.bids.request_price : 0,
         status: notification.bids?notification.bids.status : '',
       },
-      images: notification.images?notification.images[0] : '',
+      images: notification.products?notification.products.images[0] : '',
     }));
+    
 };
  
 module.exports = async function notification(req, res) {
