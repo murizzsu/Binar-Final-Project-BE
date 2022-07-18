@@ -1,44 +1,47 @@
+const { NUMBER } = require("sequelize");
+const { Error4xx, Error500 } = require("../../helpers/response/error");
+const { Success200 } = require("../../helpers/response/success");
 const { Notifications } = require("../../models");
 
-const jwt = require("jsonwebtoken");
-
-async function updateNotification(req, res) {
+const UpdateNotification = async (req, res) => {
   try {
-    let header = req.headers.authorization.split("Bearer ")[1];
-    let userData = jwt.verify(header, "s3cr3t");
+    const notificationId  = req.params.id;
 
-    let notificationId = req.params.id;
-    let notification = await Notifications.findByPk(notificationId);
-    console.log("Id = ",notification);
-    console.log("User data ID", userData.id);
-    if (!notification.is_read) {
-      if (notification.user_id == userData.id) {
-        await Notifications.update(
+    const notification = await Notifications.findOne({
+      where: {
+        id: notificationId,
+      },
+    });
+
+    console.log("notification", notification);
+
+    if (!notification.read) {
+      if (notification.user_id === Number(notificationId)) {
+        const updatedNotification = await Notifications.update(
           {
             read: true,
           },
           {
             where: {
-              id: notification.id,
+              id: notificationId,
             },
           }
         );
 
-        res.json({
-          message: "Update notifikasi berhasil",
-        });
-      } else {
-        res.json({
-          message: "Not Authorized",
-        });
+        console.log("update",!notification.read);
+        return Success200(res, "Successfull Update Notification");
       }
-      res.json({
-          message: "Update notifikasi berhasil",
-        });
+      console.log("notification.user_id = ", notification.user_id === notificationId);
+      console.log("notidicationId", notificationId);
+      return Error4xx(res, 400, "BadRequest");
     }
+    return Error4xx(res, 404, "Notification Not Found");
+    
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    return Error500(res, err.message);
   }
-}
+};
 
-module.exports = updateNotification;
+module.exports = UpdateNotification;
+

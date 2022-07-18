@@ -21,7 +21,7 @@ app.get("/api/v1/products/sold",controllers.authenticator,controllers.soldProduc
 app.get("/api/v1/products/sale",controllers.authenticator, controllers.saleProduct);
 app.get("/api/v1/products/bid", controllers.authenticator, controllers.bidProduct);
 app.get("/api/v1/notification",controllers.authenticator, controllers.notification);
-app.put("/api/v1/updateNotification", controllers.authenticator, controllers.updateNotification);
+app.put("/api/v1/notification/:id", controllers.authenticator, controllers.UpdateNotification);
 
 // products
 app.get("/api/v1/categories", controllers.GetAllCategories);
