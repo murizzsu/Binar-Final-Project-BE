@@ -36,8 +36,6 @@ app.delete("/api/v1/products/:id", controllers.authenticator, controllers.produc
 // bids
 app.get('/api/v1/products/:productId/bids', controllers.authenticator, controllers.GetProductBid);
 app.post('/api/v1/products/:productId/bids', controllers.authenticator, controllers.CreateProductBid);
-
-
 app.get('/api/v1/bids', controllers.authenticator, controllers.GetBids);
 app.post('/api/v1/bids/check', controllers.authenticator, controllers.CheckBids);
 app.put('/api/v1/bids/:bidsId', controllers.authenticator, controllers.UpdateStatusBid);

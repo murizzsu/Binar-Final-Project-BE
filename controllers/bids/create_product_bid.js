@@ -19,7 +19,11 @@ const CreateProductBid = async (req, res) => {
         if (product.user_id === userId){
             return Error4xx(res, 400, "You are not allowed to bid your own price");
         }
-    
+        
+        if(request_price >= product.price) {
+            return Error4xx(res, 400, "You are not allowed to bid higher than original price");
+        }
+
         const newProductBid = await Bids.create({
             product_id: productId,
             user_id: userId,
