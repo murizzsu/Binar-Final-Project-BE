@@ -27,17 +27,9 @@ module.exports = {
     
     // User
     profil: require("./user/profil"),
-    saleProduct: require("./user/product_sale"),
-    soldProduct: require("./user/product_sold"),
-    bidProduct : require("./user/product_bid"),
     currentUser: require("./user/current_user"),
     notification: require("./user/notification"),
-<<<<<<< controllers/index.js
     UpdateNotification: require("./user/update_notification"),
-=======
-    updateNotification: require("./user/update_notification"),
-
->>>>>>> controllers/index.js
     
     // Bids
     GetBids: require('./bids/get_bids'),

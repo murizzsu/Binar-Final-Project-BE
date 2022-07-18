@@ -19,15 +19,8 @@ app.post("/api/v1/register", controllers.register);
 app.post("/api/v1/usersimageupload", controllers.authenticator, controllers.imageUpload.users, controllers.usersImagePost);
 app.put("/api/v1/profil", controllers.authenticator, controllers.profil);
 app.get("/api/v1/currentuser", controllers.authenticator, controllers.currentUser);
-app.get("/api/v1/products/sold",controllers.authenticator,controllers.soldProduct);
-app.get("/api/v1/products/sale",controllers.authenticator, controllers.saleProduct);
-app.get("/api/v1/products/bid", controllers.authenticator, controllers.bidProduct);
 app.get("/api/v1/notification",controllers.authenticator, controllers.notification);
-<<<<<<< index.js
 app.put("/api/v1/notification/:id", controllers.authenticator, controllers.UpdateNotification);
-=======
-app.put("/api/v1/notification/:id",controllers.authenticator,controllers.updateNotification);
->>>>>>> index.js
 
 // products
 app.get("/api/v1/categories", controllers.GetAllCategories);

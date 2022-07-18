@@ -7,8 +7,7 @@ const {
 } = require("../../models");
 const { Success200 } = require("../../helpers/response/success");
 const { Error500 } = require("../../helpers/response/error");
-// const { Op } = require("sequelize");
-const jwt = require("jsonwebtoken");
+
 
 const notificationResponse = (notifications) =>{
   return notifications.map((notification) => ({
@@ -39,22 +38,7 @@ module.exports = async function notification(req, res) {
     let queryUsers = {};
     let queryBids = {};
 
-    // const { excludeUserId, user_id } = req.query;
-
-    // if (user_id) {
-    //   queryProducts = { ...queryProducts, user_id: user_id };
-    // }
-
-    // if (excludeUserId) {
-    //   queryProducts = {
-    //     ...queryProducts,
-    //     user_id: { [Op.not]: excludeUserId },
-    //   };
-    // }
-
     const { id: userId } = req.user;
-
-    // let user = await Users.findByPk(Number(userId));
 
     const user = await Users.findOne({
       where: {
@@ -63,7 +47,7 @@ module.exports = async function notification(req, res) {
   });
 
     const notifications = await Notifications.findAll({
-      // where: queryProducts,
+
       where: {
         user_id : user.id
       },

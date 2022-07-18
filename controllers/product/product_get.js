@@ -35,24 +35,12 @@ async function productGet(req, res) {
     let queryImages = {};
     let queryUsers = {};
     let queryCategories = {};
-<<<<<<< controllers/product/product_get.js
-
-    const whitelistStatusProducts = [OPEN_FOR_BID_PRODUCT, WAITING_FOR_BID_PRODUCT, SOLD_PRODUCT];
-    const { excludeStatusProduct, excludeUserId, statusProduct, category, user_id } = req.query;
-=======
->>>>>>> controllers/product/product_get.js
 
     const whitelistStatusProducts = [OPEN_FOR_BID_PRODUCT, SOLD_PRODUCT];
     const { search, excludeStatusProduct, excludeUserId, statusProduct, category, user_id } = req.query;
 
     if (whitelistStatusProducts.includes(statusProduct)){
       queryProducts = { ...queryProducts, status: statusProduct };
-<<<<<<< controllers/product/product_get.js
-    }
-
-    if (user_id){
-      queryProducts = { ...queryProducts, user_id: user_id };
-=======
     }
 
     if (search){
@@ -61,7 +49,6 @@ async function productGet(req, res) {
 
     if (user_id){
       queryProducts = { ...queryProducts, user_id: Number(user_id) };
->>>>>>> controllers/product/product_get.js
     }
 
     if (excludeStatusProduct){
@@ -69,23 +56,13 @@ async function productGet(req, res) {
     }
 
     if (excludeUserId){
-<<<<<<< controllers/product/product_get.js
-      queryProducts = { ...queryProducts, user_id: { [Op.not]: excludeUserId }};
-=======
       queryProducts = { ...queryProducts, user_id: { [Op.not]: Number(excludeUserId) }};
->>>>>>> controllers/product/product_get.js
     }
 
     if (category){
       queryCategories = { ...queryCategories, name: category };
     }
 
-<<<<<<< controllers/product/product_get.js
-
-    console.log(queryCategories);
-
-=======
->>>>>>> controllers/product/product_get.js
     const products = await Products.findAll({
       where: queryProducts,
       include: [
@@ -106,10 +83,7 @@ async function productGet(req, res) {
       ],
       order: [['id', 'DESC']]
     });
-<<<<<<< controllers/product/product_get.js
-=======
     // console.log(products)
->>>>>>> controllers/product/product_get.js
     // const productsList = await Products.findAll({ where: { status: OPEN_FOR_BID } });
     // const imagesList = await Images.findAll();
     
