@@ -23,7 +23,11 @@ app.get("/api/v1/products/sold",controllers.authenticator,controllers.soldProduc
 app.get("/api/v1/products/sale",controllers.authenticator, controllers.saleProduct);
 app.get("/api/v1/products/bid", controllers.authenticator, controllers.bidProduct);
 app.get("/api/v1/notification",controllers.authenticator, controllers.notification);
+<<<<<<< index.js
+app.put("/api/v1/notification/:id", controllers.authenticator, controllers.UpdateNotification);
+=======
 app.put("/api/v1/notification/:id",controllers.authenticator,controllers.updateNotification);
+>>>>>>> index.js
 
 // products
 app.get("/api/v1/categories", controllers.GetAllCategories);
@@ -37,8 +41,8 @@ app.put('/api/v1/products/:productId/status', controllers.authenticator, control
 app.delete("/api/v1/products/:id", controllers.authenticator, controllers.productDelete);
 
 // bids
-app.get('/api/v1/products/:productId/bids', controllers.authenticator, controllers.GetProductBid,);
-app.post('/api/v1/products/:productId/bids', controllers.authenticator, controllers.CreateProductBid,);
+app.get('/api/v1/products/:productId/bids', controllers.authenticator, controllers.GetProductBid);
+app.post('/api/v1/products/:productId/bids', controllers.authenticator, controllers.CreateProductBid);
 
 
 app.get('/api/v1/bids', controllers.authenticator, controllers.GetBids);

@@ -1,4 +1,4 @@
-const config = new URL(process.env.DATABASE_URL || "postgres://postgres:dhani9497ok@127.0.0.1:5432/binar_final_project");
+const config = new URL(process.env.DATABASE_URL || "postgres://postgres:postgres@127.0.0.1:5432/binar_final_project");
 
 const {
   DB_USER = config.username,

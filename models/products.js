@@ -30,6 +30,11 @@ module.exports = (sequelize, DataTypes) => {
         as: "user",
         foreignKey: "user_id",
       });
+
+      Products.hasMany(models.Notifications,{
+        as: "notifications",
+        foreignKey:"product_id",
+      });
     }
   }
   Products.init({
