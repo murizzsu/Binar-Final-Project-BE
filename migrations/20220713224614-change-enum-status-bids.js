@@ -13,7 +13,7 @@ module.exports = {
         }
     );
     
-    if (process.env.NODE_ENV == "test") {
+    if (queryInterface.sequelize.options.dialect == "sqlite") {
       return;
     }
     return replaceEnum({

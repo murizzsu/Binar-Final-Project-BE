@@ -4,7 +4,7 @@ const { replaceEnum } = require('../helpers/database/replaceEnum');
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    if (process.env.NODE_ENV == "test") {
+    if (queryInterface.sequelize.options.dialect == "sqlite") {
       return;
     }
     return replaceEnum({
