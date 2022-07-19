@@ -24,6 +24,10 @@ const CreateProductBid = async (req, res) => {
             return Error4xx(res, 400, "You are not allowed to bid higher than original price");
         }
 
+        if(!request_price){
+            return Error4xx(res, 400, "You are not allowed to bid if your own price is empty");
+        }
+
         const newProductBid = await Bids.create({
             product_id: productId,
             user_id: userId,

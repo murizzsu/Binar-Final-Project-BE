@@ -1,6 +1,7 @@
 const statusCodeMapping = {
     400: "BadRequest",
     403: "Forbidden",
+    422: "UnprocessableEntity",
     500: "InternalServerError",
 };
 
