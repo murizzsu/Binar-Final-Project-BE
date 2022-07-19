@@ -55,9 +55,9 @@ async function productsImagePost(req, res) {
         if (product){
             if (product.user_id === userId){
                 const insertedImages = product.images;
-                await removeManyFilesInCloudinary(PRODUCT_STORAGE, insertedImages);
-                
                 if (insertedImages.length > 0){
+                    await removeManyFilesInCloudinary(PRODUCT_STORAGE, insertedImages);
+                    
                     await Images.destroy({
                         where: {
                             product_id: productId,

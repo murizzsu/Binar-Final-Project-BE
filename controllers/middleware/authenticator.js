@@ -5,18 +5,20 @@ const { Users } = require("../../models");
 
 async function authenticator(req, res, next) {
     try {
-        let header = req.headers.authorization.split("Bearer ")[1];
-        console.log(header);
-        let payload = jwt.verify(header, "s3cr3t");
-        let user = await Users.findByPk(payload.id);
-        if (user) {
-            req.user = user;
-            next();
-            return;
-        } else {
-            return Error4xx(res, 400, "BadRequest");
+        let authToken = req.headers
+        if (authToken){
+            let header = req.headers.authorization.split("Bearer ")[1];
+            let payload = jwt.verify(header, "s3cr3t");
+            let user = await Users.findByPk(payload.id);
+            if (user) {
+                req.user = user;
+                next();
+                return;
+            } 
+            return Error4xx(res, 404, "User Not Found");
         }
     } catch (err) {
+        console.log(err)
         return Error500(res, err.message);
     }
 
