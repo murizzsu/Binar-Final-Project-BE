@@ -91,7 +91,8 @@ const GetProductBid = async (req, res) => {
                     as: 'category'
                 }, {
                     model: Images,
-                    as: 'images'
+                    as: 'images',
+                    order: [["id", "ASC"]]
                 }
             ],
             order: sequelize.literal(`(

@@ -1,6 +1,6 @@
 const { Error4xx, Error500 } = require('../../helpers/response/error');
 const { Success200 } = require('../../helpers/response/success');
-const { Bids, Products } = require('../../models');
+const { Bids, Products, Notifications } = require('../../models');
 const { PENDING_BIDS } = require('../../helpers/database/enums');
 
 // TODO check if the bid larger than the original price
@@ -34,6 +34,25 @@ const CreateProductBid = async (req, res) => {
             request_price: request_price,
             status: PENDING_BIDS
         });
+
+        await Promise.all([
+            // buyer
+            Notifications.create({
+                user_id: userId,
+                product_id: productId,
+                bid_id: newProductBid.id,
+                title: "Penawaran terkirim",
+                read: false,
+            }),
+
+            // seller
+            Notifications.create({
+                user_id: product.user_id,
+                product_id: productId,
+                title: "Produk ditawar",
+                read: false,
+            })
+        ])
     
         return Success200(res, newProductBid);
     } catch(err){

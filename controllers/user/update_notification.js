@@ -5,6 +5,7 @@ const { Notifications } = require("../../models");
 const UpdateNotification = async (req, res) => {
   try {
     const notificationId  = req.params.id;
+    const { id:userId } = req.user
 
     const notification = await Notifications.findOne({
       where: {
@@ -15,7 +16,7 @@ const UpdateNotification = async (req, res) => {
     console.log("notification", notification);
 
     if (!notification.read) {
-      if (notification.user_id === Number(notificationId)) {
+      if (notification.user_id === Number(userId)) {
         await Notifications.update(
           {
             read: true,

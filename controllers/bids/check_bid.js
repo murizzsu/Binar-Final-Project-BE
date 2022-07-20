@@ -1,4 +1,6 @@
 
+const { Op } = require('sequelize')
+const { ACCEPTED_BIDS, REJECTED_BIDS } = require('../../helpers/database/enums')
 const { Error500 } = require('../../helpers/response/error')
 const { Success200 } = require('../../helpers/response/success')
 const { Bids, } = require('../../models')
@@ -11,7 +13,10 @@ const CheckBids = async (req, res) => {
         const bidsCount = await Bids.count({
             where: {
                 user_id: userId,
-                product_id: productId
+                product_id: productId,
+                status: {
+                    [Op.not]: [ACCEPTED_BIDS, REJECTED_BIDS]
+                }
             }
         })
         console.log(bidsCount)
