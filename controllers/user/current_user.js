@@ -5,24 +5,10 @@ const { Error4xx, Error500 } = require("../../helpers/response/error");
 
 async function currentUser(req, res) {
   try {
-    let header = req.headers.authorization.split("Bearer ")[1];
-    let user1 = jwt.verify(header, "s3cr3t");
-    // let user1 = req.user1;
-
-    // if (user1) {
-    //   res.status(200).json({
-    //     id: user1.id,
-    //     name: user1.name,
-    //     city: user1.city,
-    //     address: user1.address,
-    //     phone: user1.phone,
-    //   });
-    // } else {
-    //   res.send("Anda harus login dulu");
-    // }
-
+    const { id:userId } = req.user
+    
     let user2 = await Users.findOne({
-      where: { id: user1.id}
+      where: { id: userId }
     });
 
     if (user2) {

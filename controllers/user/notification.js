@@ -27,7 +27,7 @@ const notificationResponse = (notifications) =>{
         request_price: notification.bids?notification.bids.request_price : 0,
         status: notification.bids?notification.bids.status : '',
       },
-      images: notification.products?notification.products.images.sort((a, b) => a.id - b.id)[0] : '',
+      images: notification.products?notification.products.images[0] : '',
     }));
     
 };
@@ -57,12 +57,14 @@ module.exports = async function notification(req, res) {
           as: "products",
           where: queryProducts,
           required: false,
-          include:[
+          include: [
             {
               model: Images,
               as: "images",
+              separate: true,
+              order: [["id", "ASC"]],
             },
-          ]
+          ],
         },
         {
           model: Users,
@@ -75,7 +77,9 @@ module.exports = async function notification(req, res) {
           required: false
         },
       ],
-      order: [["id", "DESC"]],
+      order: [
+        ["id", "DESC"]
+      ],
     });
     return Success200(res, notificationResponse(notifications));
   } catch (err) {

@@ -1,13 +1,9 @@
 const { Products } = require("../../models");
-const jwt = require("jsonwebtoken");
 const { Success200 } = require("../../helpers/response/success");
 const { Error4xx, Error500 } = require("../../helpers/response/error");
 
 async function productPut(req, res) {
   try {
-    let header = req.headers.authorization.split("Bearer ")[1];
-    let user = jwt.verify(header, "s3cr3t");
-
     let { id: userId } = req.user;
     const { id: idInput } = req.params;
     const product = await Products.findOne({
@@ -26,7 +22,7 @@ async function productPut(req, res) {
         };
         data = Object.assign(data, req.body);
 
-        const productUpdate = await Products.update(data, {
+        await Products.update(data, {
           where: { id: idInput },
         });
 
