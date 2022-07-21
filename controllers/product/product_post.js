@@ -1,12 +1,20 @@
-const { Products, Images } = require("../../models");
-const jwt = require("jsonwebtoken");
+const { Products } = require("../../models");
 const { Success200 } = require("../../helpers/response/success");
-const { Error500 } = require("../../helpers/response/error");
+const { Error500, Error4xx } = require("../../helpers/response/error");
 
 async function productPost(req, res) {
     try {
-        let header = req.headers.authorization.split("Bearer ")[1];
-        let user = jwt.verify(header, "s3cr3t");
+        const { id:userId } = req.user
+
+        const productCount = await Products.count({
+            where: {
+                user_id: userId
+            }
+        })
+
+        if (productCount >= 4){
+            return Error4xx(res, 400, "You have posted max products")
+        }
 
         let productInput = {
             user_id: user.id,

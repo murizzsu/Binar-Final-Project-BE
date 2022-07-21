@@ -5,9 +5,8 @@ const { Error500 } = require("../../helpers/response/error");
 
 async function profil(req, res) {
   try {
-    let header = req.headers.authorization.split("Bearer ")[1];
-    let user = jwt.verify(header, "s3cr3t");
-    let check = await Users.findByPk(user.id);
+    const { id:userId } = req.user;
+    let check = await Users.findByPk(userId);
 
     if (check) {
       const { name, city, address, phone } = req.body;
