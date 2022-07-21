@@ -19,7 +19,6 @@ const registeredUser = {
     email: "rizky@gmail.com",
     password: "12345"
 }
-
 describe("Register POST /api/v1/register", () => {
     describe("Register success", () => {
         beforeAll(async () => {
@@ -51,7 +50,6 @@ describe("Register POST /api/v1/register", () => {
 
         })
     })
-
     describe("Register unsuccess", () => {
 
         it("User Already Exist", (done) => {
