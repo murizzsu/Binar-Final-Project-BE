@@ -55,7 +55,7 @@ const UpdateStatusBid = async (req, res) => {
                                 title: "Menolak tawaran",
                                 read: false,
                             })
-                        ])
+                        ]);
                         return Success200(res, "Successfully rejected bid");
                     case WAITING_FOR_NEGOTIATION_BIDS:
                         await Promise.all([
@@ -83,7 +83,7 @@ const UpdateStatusBid = async (req, res) => {
                                 title: "Melanjutkan tawaran",
                                 read: false,
                             })
-                        ])
+                        ]);
                         return Success200(res, "Successfully accepting bid.");
                     default:
                         return Error4xx(res, 400, "BadRequest");
@@ -116,7 +116,7 @@ const UpdateStatusBid = async (req, res) => {
                                 title: "Menolak penawaran",
                                 read: false,
                             })
-                        ])
+                        ]);
                         return Success200(res, "Successfully rejected bid after negotiation");
                     case ACCEPTED_BIDS:
                         await Promise.all([
@@ -176,7 +176,7 @@ const UpdateStatusBid = async (req, res) => {
                                 }, 
                                 product_id: bid.product_id,
                             },
-                        })
+                        });
 
                         await Promise.all(allOtherBids.map(otherBid => (
                             Notifications.create({
@@ -186,7 +186,7 @@ const UpdateStatusBid = async (req, res) => {
                                 title: "Penawaran anda ditolak",
                                 read: false,
                             })
-                        )))
+                        )));
                         return Success200(res, "Successfully done transaction");
                 }
             }

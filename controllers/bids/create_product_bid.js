@@ -52,7 +52,7 @@ const CreateProductBid = async (req, res) => {
                 title: "Produk ditawar",
                 read: false,
             })
-        ])
+        ]);
     
         return Success200(res, newProductBid);
     } catch(err){

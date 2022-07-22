@@ -36,7 +36,7 @@ describe("Get /api/v1/products/:id", () => {
       request(app)
         .get(`/api/v1/products/${product.id}`)
         .expect(200)
-        .then((res) => {
+        .then(() => {
           expect.objectContaining({
             name: product.name,
             price: product.price,

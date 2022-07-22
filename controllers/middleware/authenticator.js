@@ -5,7 +5,7 @@ const { Users } = require("../../models");
 
 async function authenticator(req, res, next) {
     try {
-        let authToken = req.headers
+        let authToken = req.headers;
         if (authToken){
             let header = req.headers.authorization.split("Bearer ")[1];
             let payload = jwt.verify(header, "s3cr3t");
@@ -18,7 +18,7 @@ async function authenticator(req, res, next) {
             return Error4xx(res, 404, "User Not Found");
         }
     } catch (err) {
-        console.log(err)
+        console.log(err);
         return Error500(res, err.message);
     }
 
