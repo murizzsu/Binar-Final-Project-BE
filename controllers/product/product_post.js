@@ -17,7 +17,7 @@ async function productPost(req, res) {
         }
 
         let productInput = {
-            user_id: user.id,
+            user_id: userId,
             category_id: req.body.category_id,
             name: req.body.name,
             price: req.body.price,
@@ -30,6 +30,7 @@ async function productPost(req, res) {
 
 
     } catch (err) {
+        console.log(err)
         return Error500(res, err.message);
     }
 }
