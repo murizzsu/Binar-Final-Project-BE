@@ -86,7 +86,7 @@ const UpdateStatusBid = async (req, res) => {
                         ])
                         return Success200(res, "Successfully accepting bid.");
                     default:
-                        return Error4xx(res, "BadRequest");
+                        return Error4xx(res, 400, "BadRequest");
                 }
             } else if (bid.status === WAITING_FOR_NEGOTIATION_BIDS){
                 switch(status){

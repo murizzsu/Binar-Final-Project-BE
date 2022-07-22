@@ -15,7 +15,7 @@ const UpdateNotification = async (req, res) => {
 
     console.log("notification", notification);
 
-    if (!notification.read) {
+    if (notification) {
       if (notification.user_id === Number(userId)) {
         await Notifications.update(
           {
@@ -30,7 +30,7 @@ const UpdateNotification = async (req, res) => {
 
         return Success200(res, "Successfull Update Notification");
       }
-      return Error4xx(res, 400, "BadRequest");
+      return Error4xx(res, 403, "You are not the owner of this notification");
     }
     return Error4xx(res, 404, "Notification Not Found");
     

@@ -12,6 +12,7 @@ const newErrorKind = (statusCode) => {
 const newError4xxPayload = (statusCode, message) => {
     return {
         self: "Error",
+        statusCode,
         kind: newErrorKind(statusCode),
         message,
     };
@@ -20,6 +21,7 @@ const newError4xxPayload = (statusCode, message) => {
 const newError500Payload = (message) => {
     return {
         self: "Error",
+        statusCode: 500,
         kind: newErrorKind(500),
         message,
     };

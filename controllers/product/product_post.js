@@ -13,11 +13,11 @@ async function productPost(req, res) {
         })
 
         if (productCount >= 4){
-            return Error4xx(res, 400, "You have posted max products")
+            return Error4xx(res, 409, "You have posted max products")
         }
 
         let productInput = {
-            user_id: user.id,
+            user_id: userId,
             category_id: req.body.category_id,
             name: req.body.name,
             price: req.body.price,
@@ -30,6 +30,7 @@ async function productPost(req, res) {
 
 
     } catch (err) {
+        console.log(err)
         return Error500(res, err.message);
     }
 }

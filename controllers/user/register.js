@@ -16,7 +16,7 @@ async function register(req, res) {
     }); 
 
     if(existingUser){
-      return Error4xx(res, 400, "User Already Exist");
+      return Error4xx(res, 409, "User Already Exist");
     }
 
     let user = await Users.create({
