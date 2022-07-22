@@ -11,6 +11,7 @@ app.use(express.json());
 app.put("/api/v1/notification/:id", authenticator, notification);
 app.post("/api/v1/login",login)
 let notif
+let invalidNotification
 describe("PUT /api/v1/notification/:id", () => {
   const notificationModel = Notifications;
 
@@ -101,7 +102,16 @@ describe("PUT /api/v1/notification/:id", () => {
             message: "DataTypes.STRING",
             read: false,
             };
+            const invalidNotif = {
+              user_id: 1,
+              product_id: 1,
+              bid_id: 1,
+              title: "DataTypes.STRING",
+              message: "DataTypes.STRING",
+              read: true,
+              };
 
+            invalidNotification = await notificationModel.create(invalidNotif)
             notif = await notificationModel.create(notifDetail)
             done()
         })   
@@ -113,18 +123,32 @@ describe("PUT /api/v1/notification/:id", () => {
         await notificationModel.destroy({ where: { id: notif.id } });
       });
 
-    it("response 400", (done) => {
+    it("response 403", (done) => {
         request(app)
           .put(`/api/v1/notification/${notif.id}`)
           .set("Authorization",`Bearer ${invalidToken}`)
           .set('Accept','application/json')
-          .expect(400)
+          .expect(403)
           .then((res) => {
-            expect(res.body.message).toEqual("BadRequest");
+            expect(res.body.message).toEqual("You are not the owner of this notification");
             done();
           })
           .catch(done);
       });
+    
+      it("response 404", (done) => {
+        request(app)
+          .put(`/api/v1/notification/-100`)
+          .set("Authorization",`Bearer ${validToken}`)
+          .set('Accept','application/json')
+          .expect(404)
+          .then((res) => {
+            expect(res.body.message).toEqual("Notification Not Found");
+            done();
+          })
+          .catch(done);
+      });
+    
   })
 });
 

@@ -58,7 +58,7 @@ describe("Register POST /api/v1/register", () => {
             .post("/api/v1/register")
             .set("Content-Type", "application/json")
             .send(registeredUser)
-            .expect(400)
+            .expect(409)
             .then((res) => {
               expect(res.body.message).toBe("User Already Exist");
               done();

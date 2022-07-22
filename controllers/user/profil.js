@@ -24,7 +24,7 @@ async function profil(req, res) {
       );
       return Success200(res, "Successfully updating profile");
     }
-    return Error4xx(res, 404, "User Not Found")
+    return Error4xx(res, 404, "User Not Found");
   } catch (err) {
     return Error500(res, err.message);
   }
