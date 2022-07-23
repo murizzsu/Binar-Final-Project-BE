@@ -52,7 +52,7 @@ const UpdateStatusBid = async (req, res) => {
                             Notifications.create({
                                 user_id: userId,
                                 product_id: bid.product.id,
-                                title: "Menolak tawaran",
+                                title: "Menolak penawaran",
                                 read: false,
                             })
                         ])
@@ -80,7 +80,7 @@ const UpdateStatusBid = async (req, res) => {
                             Notifications.create({
                                 user_id: userId,
                                 product_id: bid.product.id,
-                                title: "Melanjutkan tawaran",
+                                title: "Melanjutkan penawaran",
                                 read: false,
                             })
                         ])
@@ -163,7 +163,7 @@ const UpdateStatusBid = async (req, res) => {
                             Notifications.create({
                                 user_id: userId,
                                 product_id: bid.product_id,
-                                title: "Menyelesaikan tawaran",
+                                title: "Menyelesaikan penawaran",
                                 read: false,
                             }), 
                         ]);
