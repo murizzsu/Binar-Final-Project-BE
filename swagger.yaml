@@ -11,6 +11,8 @@ tags:
     description: ------
   - name: Users
     description: ------
+  - name: Bids
+    description: ------
 
 servers:
   - url: http://localhost:8000
