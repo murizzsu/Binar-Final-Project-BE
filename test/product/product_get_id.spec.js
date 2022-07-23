@@ -16,23 +16,23 @@ describe("Get /api/v1/products/:id", () => {
   const productsModel = Products;
 
   describe("Successfull Operation", () => {
-    
-    beforeAll(async() => {
-        product = await productsModel.create({
-            user_id: 1,
-            category_id: 1,
-            name: "DataTypes.STRING",
-            price: "DataTypes.FLOAT",
-            description: "DataTypes.TEXT",
-            status: "open_for_bid",
-            });
+
+    beforeAll(async () => {
+      product = await productsModel.create({
+        user_id: 1,
+        category_id: 1,
+        name: "DataTypes.STRING",
+        price: "DataTypes.FLOAT",
+        description: "DataTypes.TEXT",
+        status: "open_for_bid",
+      });
     });
 
     afterAll(
       async () => await productsModel.destroy({ where: { id: product.id } })
     );
 
-    it("Response 200",  (done) => {
+    it("Response 200", (done) => {
       request(app)
         .get(`/api/v1/products/${product.id}`)
         .expect(200)
@@ -46,7 +46,7 @@ describe("Get /api/v1/products/:id", () => {
           });
           done()
         }).catch(done)
-        
+
     });
   });
 

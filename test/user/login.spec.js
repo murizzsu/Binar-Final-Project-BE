@@ -22,7 +22,7 @@ describe("Login POST /api/v1/login", () => {
                 email: "rizky@gmail.com",
                 password: "12345",
             };
-            
+
             request(app)
                 .post("/api/v1/login")
                 .set("Content-Type", "application/json")
@@ -42,7 +42,7 @@ describe("Login POST /api/v1/login", () => {
                 email: "dhani1@gmailcom",
                 password: "invalidpass"
             }
-            
+
             request(app)
                 .post("/api/v1/login")
                 .set("Content-Type", "application/json")

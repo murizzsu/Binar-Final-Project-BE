@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json())
 app.get("/api/v1/products", product_get)
 
-describe("User GET /api/v1/products", () => {
+describe("GET /api/v1/products", () => {
 
     it("Get success", (done) => {
 

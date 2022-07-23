@@ -19,12 +19,12 @@ describe("User GET /api/v1/currentuser", () => {
         afterAll(() => {
 
         })
-        
+
         it("Get user", async () => {
             const user = await Users.findOne({
                 where: { email: "rizky@gmail.com" },
             });
-            
+
             let User = {
                 id: user.id,
                 email: user.email,
@@ -37,7 +37,7 @@ describe("User GET /api/v1/currentuser", () => {
 
             let token = jwt.sign(User, "s3cr3t");
             let user2 = await Users.findOne({
-                where: { id: user.id}
+                where: { id: user.id }
             })
 
             const response = await request(app)
@@ -46,12 +46,12 @@ describe("User GET /api/v1/currentuser", () => {
                 .set("authorization", `Bearer ${token}`)
                 .send(user2)
                 .expect(200)
-        expect(response.body).toBeTruthy();
+            expect(response.body).toBeTruthy();
         })
     })
 
     describe("Get unsuccess", () => {
-        
+
     })
 
 
