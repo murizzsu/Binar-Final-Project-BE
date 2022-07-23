@@ -5,7 +5,7 @@ const { Notifications } = require("../../models");
 const UpdateNotification = async (req, res) => {
   try {
     const notificationId  = req.params.id;
-    const { id:userId } = req.user
+    const { id:userId } = req.user;
 
     const notification = await Notifications.findOne({
       where: {

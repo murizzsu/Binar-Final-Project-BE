@@ -146,9 +146,6 @@ components:
     ProductsPost:
       type: object
       properties:
-        user_id:
-          type: number
-          example: 1
         category_id:
           type: number
           example: 1
@@ -267,6 +264,15 @@ components:
             name:
               type: string
               example: categoryName
+    Category:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+        name:
+          type: string
+          example: categoryName
 
   requestBodies:
     LoginRequest:
@@ -404,6 +410,22 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/ProductsId"
+    GetCategories:
+      description: List All Category
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Category"
+            example:
+              - DefaultValue : [                  
+                  {id: 1, name: "Hobi"},
+                  {id: 2, name: "Kendaraan"},
+                  {id: 3, name: "Baju"},
+                  {id: 4, name: "Elektronik"},
+                  {id: 5, name: "Kesehatan"}
+                ]
   
   securitySchemes:
     bearerAuth:
@@ -484,6 +506,37 @@ paths:
       responses:
         200:
           description: Succesfully update image profile
+    
+  /api/v1/notification:
+    get:
+      tags:
+        - Users
+      summary: Get Notification
+      description: Get Notification endpoint
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Success
+          
+  /api/v1/notification/{id}:
+    put:
+      tags:
+        - Users
+      summary: Put Status Notification by id
+      description: Put Status Notification by id endpoint
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: input Id in integer
+          required: true
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: success
     
   /api/v1/products:
     post:
@@ -595,27 +648,164 @@ paths:
         200:
           description: succes
 
-  # /api/v1/products/sale
-  #   get:
-  #     tags:
-  #       - Users
-  #     summary: Get Products sale by user
-  #     description: Get Products sale by user
-  #     security:
-  #       - bearerAuth: []
-  #     responses:
-  #       200:
-  #         $ref: "#/components/responses/ProductsByIdResponses"
-          
-  # /api/v1/products/sold:
-  #   get:
-  #     tags:
-  #       - Users
-  #     summary: Get Products sold by user
-  #     description: Get Products sold by user
-  #     security:
-  #       - bearerAuth: []
-  #     responses:
-  #       200:
-  #         description: success
+  /api/v1/categories:
+    get:
+      tags:
+        - Products
+      summary: Get All Categories
+      description: Get All Categories Endpoint
+      responses:
+        200:
+          $ref: "#/components/responses/GetCategories"
   
+  /api/v1/products/wishlist:
+    get:
+      tags:
+        - Products
+      summary: Get Products Wishlist
+      description: Get Products Wishlist Endpoint
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Success
+          
+  /api/v1/products/{productId}/status:
+    put:
+      tags:
+        - Products
+      summary: Put Products Status by id
+      description: Put Product Status by id endpoint
+      parameters:
+        - in: path
+          name: productId
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: sold
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: success
+          
+          
+  /api/v1/products/{productId}/bids:
+    post:
+      tags:
+        - Bids
+      summary: Create Bids
+      description: Create Bids Endpoint
+      parameters:
+        - in: path
+          name: productId
+          schema:
+            type: integer
+          description: input productId in integer
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                request_price:
+                  type: number
+                  format: float
+                  example: 80000
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: success
+    
+    get:
+      tags:
+        - Bids
+      summary: Get Products Bid
+      description: Get Products Bid by Id endpoint
+      parameters:
+        - in: path
+          name: productId
+          schema:
+            type: integer
+          description: input productId in integer
+          required: true
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: success
+          
+  /api/v1/bids/check:
+    post:
+      tags:
+        - Bids
+      summary: Check Bids
+      description: Check Bids Endpoint
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                productId:
+                  type: integer
+                  example: 1
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: success
+  
+  /api/v1/bids:
+    get:
+      tags:
+        - Bids
+      summary: Get Bids
+      description: Get Bids Endpoint
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Success
+          
+  /api/v1/bids/{bidsId}:
+    put:
+      tags:
+        - Bids
+      summary: Put Bids Status by id
+      description: Put Bids Status by id endpoint
+      parameters:
+        - in: path
+          name: bidsId
+          schema:
+            type: integer
+          description: input bidsId in integer
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: rejected
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: success
+
+          
+          
+   

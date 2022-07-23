@@ -4,16 +4,16 @@ const { Error500, Error4xx } = require("../../helpers/response/error");
 
 async function productPost(req, res) {
     try {
-        const { id:userId } = req.user
+        const { id:userId } = req.user;
 
         const productCount = await Products.count({
             where: {
                 user_id: userId
             }
-        })
+        });
 
         if (productCount >= 4){
-            return Error4xx(res, 409, "You have posted max products")
+            return Error4xx(res, 409, "You have posted max products");
         }
 
         let productInput = {
@@ -30,7 +30,7 @@ async function productPost(req, res) {
 
 
     } catch (err) {
-        console.log(err)
+        console.log(err);
         return Error500(res, err.message);
     }
 }

@@ -5,7 +5,7 @@ const { Error4xx, Error500 } = require("../../helpers/response/error");
 
 async function currentUser(req, res) {
   try {
-    const { id:userId } = req.user
+    const { id:userId } = req.user;
     
     let user2 = await Users.findOne({
       where: { id: userId }
