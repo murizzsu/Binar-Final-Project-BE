@@ -21,6 +21,6 @@ describe("User GET /api/v1/categories", () => {
             .catch(done);
     });
 
-    
+
 });
 

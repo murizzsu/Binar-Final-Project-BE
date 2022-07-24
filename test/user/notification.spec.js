@@ -43,7 +43,7 @@ describe("Get /api/v1/notification", () => {
           done();
         });
     });
-    
+
     afterAll(async () => {
       await notificationModel.destroy({ where: { id: notif.id } });
     });
@@ -52,8 +52,8 @@ describe("Get /api/v1/notification", () => {
     it("response 200", (done) => {
       request(app)
         .get(`/api/v1/notification`)
-        .set("Authorization",`Bearer ${token}`)
-        .set('Accept','application/json')
+        .set("Authorization", `Bearer ${token}`)
+        .set('Accept', 'application/json')
         .expect(200)
         .then(() => {
           expect.objectContaining({

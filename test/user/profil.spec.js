@@ -19,12 +19,12 @@ describe("User Put /api/v1/profil", () => {
         afterAll(() => {
 
         })
-        
+
         it("Put user", async () => {
             const user = await Users.findOne({
                 where: { email: "rizky@gmail.com" },
             });
-            
+
             let User = {
                 id: user.id,
                 email: user.email,
@@ -43,7 +43,7 @@ describe("User Put /api/v1/profil", () => {
                 city: User.city,
                 address: User.address,
                 phone: User.phone,
-                img_url: User.img_url, 
+                img_url: User.img_url,
             }
             const response = await request(app)
                 .put("/api/v1/profil")
@@ -51,12 +51,12 @@ describe("User Put /api/v1/profil", () => {
                 .set("authorization", `Bearer ${token}`)
                 .send(user2)
                 .expect(200)
-        expect(response.body).toEqual("Successfully updating profile");
+            expect(response.body).toEqual("Successfully updating profile");
         })
     })
 
     describe("Put unsuccess", () => {
-        
+
     })
 
 

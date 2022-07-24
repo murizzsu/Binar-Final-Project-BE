@@ -18,41 +18,41 @@ describe("PUT /api/v1/products/:id", () => {
     let product;
     let token;
     const userCredential = {
-        email:"rizky@gmail.com",
-        password:"12345"
+      email: "rizky@gmail.com",
+      password: "12345"
     }
 
     beforeAll((done) => {
-        request(app)
+      request(app)
         .post('/api/v1/login')
         .send(userCredential)
-        .end(async(err,res)=>{
-            if(err) return done(err)
-            expect(res.header['content-type']).toMatch(/json/)
-            expect(res.status).toEqual(200)
-            token = res.body.token
+        .end(async (err, res) => {
+          if (err) return done(err)
+          expect(res.header['content-type']).toMatch(/json/)
+          expect(res.status).toEqual(200)
+          token = res.body.token
 
-           product = await productsModel.create({
+          product = await productsModel.create({
             user_id: 1,
             category_id: 1,
             name: "DataTypes.STRING",
             price: "DataTypes.FLOAT",
             description: "DataTypes.TEXT",
             status: "open_for_bid",
-            });
-            done()
+          });
+          done()
         })
     });
 
     afterAll(() => {
-     
+
     });
 
     it("response 200", (done) => {
       request(app)
         .put(`/api/v1/products/${product.id}`)
-        .set("Authorization",`Bearer ${token}`)
-        .set('Accept','application/json')
+        .set("Authorization", `Bearer ${token}`)
+        .set('Accept', 'application/json')
         .expect(200)
         .then((res) => {
           expect(res.body).toEqual("Successfully deleted");
